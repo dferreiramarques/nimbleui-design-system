@@ -29,6 +29,8 @@ First migration: **Roadmaps** (branch `nimbleui-migration`). Use this for Taskbo
 - **Slimming CSS drops rules silently.** After deleting what the kit provides, diff the selector lists: extract every selector from the old app CSS and from kit + new app CSS, and review what is missing (Roadmaps lost `.tones/.tone-opt` — unstyled buttons — and `.btn--del-left` this way). Do it before the browser check; keep the script in the app's tools.
 - **Check dialogs against short screens** (≈ 630px of viewport height): dialogs must not scroll. Put short fields side by side (title + column, tag + when) rather than shrinking spacing.
 
+- **Prove the pages did not change.** Serve the old and the new `public/` on two ports (a tiny server with CORS), fetch each page, inline its CSS into a `srcdoc` iframe, and compare `getComputedStyle` of every element in both themes at 1280 and 375px. It caught a lost specificity (`.lp-hero .lp-note` became `.lp-note` and lost to `.lp-hero p`) and a missing `position: relative`. Expected leftovers are deliberate (e.g. no `grab` cursor on a static demo; accent links on light legal pages now use `--primary-fg`, which has better contrast).
+
 ## Testing recipes
 
 - **Fake backend page:** copy `public/`, replace the sync/auth script with a stub that calls the app's hooks with sample data; serve with `python -m http.server`. Lets you exercise the whole UI without credentials.
