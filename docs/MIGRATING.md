@@ -26,6 +26,9 @@ First migration: **Roadmaps** (branch `nimbleui-migration`). Use this for Taskbo
 - **CSP:** setting CSS custom properties with `style.setProperty` is allowed under `style-src 'self'`; inline `style=""` attributes and `setAttribute('style', …)` are not. The kit only uses the former (drag ghost position).
 - **Stable ids for items.** `nimble:sort` gives the element and `newIndex` among items only; map with `data-id`, and keep placeholders (`.empty`) outside `[data-sortable-item]`.
 
+- **Slimming CSS drops rules silently.** After deleting what the kit provides, diff the selector lists: extract every selector from the old app CSS and from kit + new app CSS, and review what is missing (Roadmaps lost `.tones/.tone-opt` — unstyled buttons — and `.btn--del-left` this way). Do it before the browser check; keep the script in the app's tools.
+- **Check dialogs against short screens** (≈ 630px of viewport height): dialogs must not scroll. Put short fields side by side (title + column, tag + when) rather than shrinking spacing.
+
 ## Testing recipes
 
 - **Fake backend page:** copy `public/`, replace the sync/auth script with a stub that calls the app's hooks with sample data; serve with `python -m http.server`. Lets you exercise the whole UI without credentials.
