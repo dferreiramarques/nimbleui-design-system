@@ -38,3 +38,17 @@ Add two blocks to your own CSS (colour only), e.g.
 ```
 
 Check contrast: `--primary-ink` on `--primary`, and `--primary-fg` on `--bg`/`--surface`, ≥ 4.5:1 in both themes.
+
+## Product page recipe
+
+Template: `templates/product-page/` (`index.html`, `privacy.html`, `terms.html`). Copy the folder, replace every `{{PLACEHOLDER}}`, set `data-accent`, fix the three `../../src/` paths.
+
+Section order (fixed — drop sections, don't reorder): **top bar → hero → demo → features (3 `fcard`) → how it works (`steps`, optional `snippet`) → proof (2 `fcard`) → final CTA → footer**.
+
+- **Top bar:** brand, ≤ 4 anchor links (hidden ≤ 820px), theme toggle, one `btn--primary` CTA.
+- **Hero:** eyebrow = 3 facts separated by `·`; h1 states the outcome with the key phrase in `<em>` (the accent); one paragraph ≤ 40 words; CTAs = `btn--primary btn--lg` + `btn--outline btn--lg`; one trust line (`.lp-note`).
+- **Demo:** a static, believable example of the product directly under the hero (board, screenshot, widget). Never an empty placeholder.
+- **Copy:** benefits not mechanisms; sentences short; same CTA wording top, hero and bottom; no more than one `--primary` button per viewport zone.
+- **Legal:** `privacy.html` and `terms.html` use `.doc`; link them in the footer (and from OAuth consent screens if needed).
+- **Accent:** one per product via `data-accent`; add new accents as colour-only blocks (see above). Don't restyle components per product.
+- **Rules:** no inline `<script>`/`style=""`; theme differences are colour only (verify computed styles in both themes); check at 375px width — no horizontal scroll.

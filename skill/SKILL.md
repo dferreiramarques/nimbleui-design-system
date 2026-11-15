@@ -27,6 +27,10 @@ Fontes (opcional): Google Fonts Inter 400–700 + JetBrains Mono 400/500.
 - Landing: `.lp-hero` (h1 com `<em>` = acento), `.lp-sec/.lp-head`, `.grid2/.grid3`, `.fcard`, `.steps/.step`, `.snippet`, `.lp-foot`; páginas legais `.doc`.
 - Tokens: superfícies `--bg --surface --surface-2 --surface-3 --border --border-strong`; texto `--text --muted --subtle`; acento `--primary --primary-h --primary-fg --primary-ink --primary-soft --glow`; semântica `--success --info --warn --danger`; estado `--now --next --later`; geometria `--r-sm|md|lg|xl --ring --fast --norm --sh-sm|md|lg`.
 
+## Página de produto
+Template pronto: `templates/product-page/` do repo (cópia em `assets/product-page/` desta skill): `index.html`, `privacy.html`, `terms.html`. Copiar, substituir todos os `{{PLACEHOLDER}}`, definir `data-accent`, ajustar os 3 caminhos `../../src/`.
+Ordem fixa: barra → hero (eyebrow com 3 factos, h1 com `<em>` no resultado, 1 parágrafo ≤ 40 palavras, CTA primário + outline, linha de confiança) → demo estática real → 3 `fcard` → `steps` (+ `snippet`) → 2 `fcard` de confiança → CTA final → rodapé com Privacy/Terms. Retirar secções, não reordenar. Mesmo texto de CTA em cima, no hero e no fim; benefícios, não mecanismos. Detalhe em `docs/DESIGN-SYSTEM.md`.
+
 ## Regras
 1. **Dark/light só mudam cores.** Cores em tokens por tema; tamanhos, tipografia, espaçamento, raios, geometria de sombras, layout, animações ficam em `:root`/componentes uma só vez. Nunca regras não-cor dentro de `[data-theme]`. Ao verificar UI, comparar estilos calculados nos dois temas — a lista de diferenças não-cor tem de ficar vazia.
 2. **Um acento por produto** (5 tokens + `--glow`). Texto de acento sobre superfícies = `--primary-fg`; texto sobre fundo de acento = `--primary-ink`. Novo acento = dois blocos só de cor (`[data-theme=light][data-accent=x]`, `[data-theme=dark][data-accent=x]`), contraste ≥ 4.5:1.

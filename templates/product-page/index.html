@@ -1,0 +1,126 @@
+<!doctype html>
+<!-- nimbleUI product page template.
+     1. Replace every {{PLACEHOLDER}} (search "{{").  2. Set data-accent on <html> (omit = emerald, or rose / indigo).
+     3. Copy src/*.css + theme.js to your project and fix the three ../../src/ paths below.
+     4. Delete the sections you don't need; keep the order: hero → demo → features → how → proof → final CTA.
+     No inline <script> or style="" (CSP-friendly). -->
+<html lang="en" data-theme="light" data-accent="">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{PRODUCT}} — {{ONE-LINE BENEFIT}}</title>
+<meta name="description" content="{{ONE SENTENCE, ≤ 155 chars}}">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<script src="../../src/theme.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../src/tokens.css">
+<link rel="stylesheet" href="../../src/components.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar__in">
+      <a class="brand" href="./">
+        <span class="brand__mark" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4 10-10"/></svg></span>
+        {{PRODUCT}}
+      </a>
+      <nav class="nav" aria-label="Sections">
+        <a href="#features">Features</a>
+        <a href="#how">How it works</a>
+        <a href="#proof">Why us</a>
+      </nav>
+      <span class="grow"></span>
+      <button class="btn btn--text btn--icon" data-theme-toggle aria-label="Toggle light / dark theme" title="Toggle theme"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+      <a class="btn btn--primary" href="{{APP URL}}">{{PRIMARY CTA, e.g. Open the app}}</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- 1. Hero: eyebrow (facts), h1 with the key phrase in <em>, one paragraph, two CTAs, one reassurance line -->
+    <section class="wrap lp-hero">
+      <div class="eyebrow">{{Free · No setup · Sign-in}}</div>
+      <h1>{{Say the outcome — }}<em>{{the key phrase}}</em>.</h1>
+      <p>{{Two sentences: what it is, and why it is different. ≤ 40 words.}}</p>
+      <div class="lp-cta">
+        <a class="btn btn--primary btn--lg" href="{{APP URL}}">{{Primary CTA}}</a>
+        <a class="btn btn--outline btn--lg" href="#how">See how it works</a>
+      </div>
+      <p class="lp-note">{{Trust line: price, data ownership, no card.}}</p>
+    </section>
+
+    <!-- 2. Demo: a static, real-looking example of the product (here a board; swap for a screenshot or your own markup) -->
+    <div class="wrap" aria-label="Example">
+      <div class="cols">
+        <section class="col" data-col="now">
+          <div class="col__head"><span class="col__dot"></span><span class="col__title">{{Now}}</span><span class="col__count">2</span></div>
+          <div class="col__list">
+            <article class="card"><h3 class="card__title">{{Item}}</h3><p class="card__desc">{{One short line.}}</p><div class="card__foot"><span class="tag" data-tone="success">{{Status}}</span></div></article>
+            <article class="card"><h3 class="card__title">{{Item}}</h3><p class="card__desc">{{One short line.}}</p></article>
+          </div>
+        </section>
+        <section class="col" data-col="next">
+          <div class="col__head"><span class="col__dot"></span><span class="col__title">{{Next}}</span><span class="col__count">1</span></div>
+          <div class="col__list"><article class="card"><h3 class="card__title">{{Item}}</h3><p class="card__desc">{{One short line.}}</p></article></div>
+        </section>
+        <section class="col" data-col="later">
+          <div class="col__head"><span class="col__dot"></span><span class="col__title">{{Later}}</span><span class="col__count">1</span></div>
+          <div class="col__list"><article class="card"><h3 class="card__title">{{Item}}</h3><p class="card__desc">{{One short line.}}</p></article></div>
+        </section>
+      </div>
+    </div>
+
+    <!-- 3. Features: exactly 3 fcards (icon, h3, ≤ 20 words) -->
+    <section class="lp-sec" id="features">
+      <div class="wrap">
+        <div class="lp-head"><span class="eyebrow">Features</span><h2>{{Section headline}}</h2><p>{{Supporting sentence.}}</p></div>
+        <div class="grid3">
+          <article class="fcard"><div class="fcard__ico"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h8l-1 8 10-12h-8z"/></svg></div><h3>{{Feature 1}}</h3><p>{{Benefit, not mechanism.}}</p></article>
+          <article class="fcard"><div class="fcard__ico"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><h3>{{Feature 2}}</h3><p>{{Benefit, not mechanism.}}</p></article>
+          <article class="fcard"><div class="fcard__ico"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 12h8"/></svg></div><h3>{{Feature 3}}</h3><p>{{Benefit, not mechanism.}}</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. How it works: 4 steps (use 2 or 3 if fewer; the grid adapts) + optional snippet -->
+    <section class="lp-sec" id="how">
+      <div class="wrap">
+        <div class="lp-head"><span class="eyebrow">How it works</span><h2>{{Up and running in minutes}}</h2></div>
+        <div class="steps">
+          <div class="step"><h3>{{Step 1}}</h3><p>{{One line.}}</p></div>
+          <div class="step"><h3>{{Step 2}}</h3><p>{{One line.}}</p></div>
+          <div class="step"><h3>{{Step 3}}</h3><p>{{One line.}}</p></div>
+          <div class="step"><h3>{{Step 4}}</h3><p>{{One line.}}</p></div>
+        </div>
+        <div class="snippet"><pre>{{code or embed snippet, HTML-escaped}}</pre></div>
+      </div>
+    </section>
+
+    <!-- 5. Proof / trust: 2 fcards (privacy, ownership, pricing, open source…) -->
+    <section class="lp-sec" id="proof">
+      <div class="wrap">
+        <div class="lp-head"><span class="eyebrow">Why {{PRODUCT}}</span><h2>{{Trust headline}}</h2></div>
+        <div class="grid2">
+          <article class="fcard"><h3>{{Point 1}}</h3><p>{{Two sentences.}}</p></article>
+          <article class="fcard"><h3>{{Point 2}}</h3><p>{{Two sentences.}}</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Final call: repeat the primary CTA -->
+    <section class="lp-sec">
+      <div class="wrap lp-center">
+        <div class="lp-head lp-head--center"><h2>{{Action headline}}</h2><p>{{Reassurance.}}</p></div>
+        <a class="btn btn--primary btn--lg" href="{{APP URL}}">{{Primary CTA}}</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="lp-foot">
+    <div class="wrap">
+      <span>© {{YEAR}} {{PRODUCT}}</span>
+      <span><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="{{APP URL}}">Open the app</a></span>
+    </div>
+  </footer>
+</body>
+</html>
