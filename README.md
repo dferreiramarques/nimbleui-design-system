@@ -18,6 +18,7 @@ Dark and light differ **only in colour**; three accents (emerald, rose, indigo) 
 - `docs/DESIGN-SYSTEM.md` — principles, tokens, how to add an accent
 - `docs/PATTERNS.md` — the complex UI patterns of the apps (shell, account menu, board, tabs, shelves, matrix, drawer, share, sync/conflicts…) + legacy→nimbleUI migration map
 - `docs/DECISIONS.md` — decisions log
+- `docs/MIGRATING.md` — migration checklist, learnings and test recipes; `tools/check-theme.mjs` checks that themes only change colours
 - `templates/product-page/` — product page template (+ privacy/terms), copy and fill `{{PLACEHOLDER}}`
 - `skill/SKILL.md` — Claude Code skill (`nimbleui-design-system`); copy the `skill/` folder to `~/.claude/skills/nimbleui-design-system/`
 
