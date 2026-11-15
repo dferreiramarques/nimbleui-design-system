@@ -17,6 +17,10 @@
 - **G. Source of truth: this repo.** Roadmaps/Taskboards/Diagramico copy `tokens.css` + `components.css` from here; `product-page.css` is no longer generated from `app.css`, and the drift test compares against this repo.
 - **Defaults taken without asking:** E (CSP) → strict, no `unsafe-inline`; Diagramico must move its inline script/style to files when it migrates. F (naming) → BEM modifiers (`.btn--primary`), so `.btn.primary` and `.ibtn.on` are renamed on migration. H → follows D (auto), legal pages included.
 
+## Migration log
+- **Roadmaps (done, 2026-11-15):** `public/nimble/` = copy of `src/`; `app.css` slimmed to app-specific rules; drag (cards + tabs) → `data-sortable`; account menu → `.menu` + `data-menu-toggle`; dialogs → `NimbleUI.dialog`; toast → `NimbleUI.toast`; sync chip → `.sync[data-state]`; theme → `theme.js` (auto by default, reuses the `roadmaps-theme` key via `<meta name="nimble-theme-key">`); `product-page.css` and the old drift test removed. Kit changes it forced: touch drag starts on the first move after a 250ms hold (a still long-press stays free for context menus); `data-sortable-keyboard="off"`; sort keys ignored when the app already handled the key (`defaultPrevented`); items that are themselves buttons can be dragged; menu only refocuses its toggle if focus is still inside; `theme.js` meta key + `data-theme-icon`. Still app-local (css-todo patterns): colour tabs + colour popover, share dialog, public page.
+- **Next:** Taskboards, then Diagramico.
+
 ## Found while auditing the three products — open (see questions)
 | # | Topic | Roadmaps / nimbleUI | Taskboards | Diagramico |
 |---|---|---|---|---|

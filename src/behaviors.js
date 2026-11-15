@@ -4,8 +4,8 @@
 
    Sort      container [data-sortable][data-sortable-group="g"][data-sortable-axis="x"][data-sortable-handle]
              items     [data-sortable-item]  (direct children; handle = [data-handle]; skip drag with [data-no-drag])
-             mouse/pen: drag after 5px · touch: long-press 250ms · Esc cancels · autoscroll near edges
-             keyboard: focus an item, Space/Enter grab, arrows move (←/→ also change container), Space/Enter drop, Esc cancel
+             mouse/pen: drag after 5px · touch: hold 250ms then move · Esc cancels · autoscroll near edges
+             keyboard (off with data-sortable-keyboard="off"; ignored if the app already handled the key): focus an item, Space/Enter grab, arrows move (←/→ also change container), Space/Enter drop, Esc cancel
              event:    nimble:sort {item, from, to, oldIndex, newIndex}   (dispatched on the target container)
    Edit      [data-editable][="multiline"][data-maxlength][data-allow-empty]  dblclick / Enter / F2, or [data-edit-trigger="#id"]
              Enter saves (multiline: Ctrl/Cmd+Enter) · Esc cancels · blur saves · event nimble:edit {value, oldValue} (cancelable)
@@ -74,13 +74,14 @@
     var c = item.parentElement;
     if (!c || !c.hasAttribute('data-sortable')) return;
     var inHandle = !!e.target.closest('[data-handle]');
-    if (c.hasAttribute('data-sortable-handle') ? !inHandle : (!inHandle && e.target.closest(INTERACTIVE))) return;
+    var ia = e.target.closest(INTERACTIVE), blocked = ia && ia !== item && item.contains(ia);
+    if (c.hasAttribute('data-sortable-handle') ? !inHandle : (!inHandle && blocked)) return;
     drag = {
       item: item, from: c, fromIndex: itemsOf(c).indexOf(item), group: groupOf(c), axis: axisOf(c),
       x0: e.clientX, y0: e.clientY, x: e.clientX, y: e.clientY, id: e.pointerId, type: e.pointerType,
       started: false, ready: e.pointerType !== 'touch', timer: 0, raf: 0, over: null, slot: null, ghost: null
     };
-    if (e.pointerType === 'touch') drag.timer = setTimeout(function () { if (drag) { drag.ready = true; if (!drag.started) start(); } }, 250);
+    if (e.pointerType === 'touch') drag.timer = setTimeout(function () { if (drag) drag.ready = true; }, 250);   // hold, then move: starts on the first move, so a longer still press stays free for the app (e.g. a context menu)
     document.addEventListener('pointermove', onMove, true);
     document.addEventListener('pointerup', onUp, true);
     document.addEventListener('pointercancel', onCancel, true);
@@ -115,7 +116,7 @@
     d.x = e.clientX; d.y = e.clientY;
     if (!d.started) {
       var moved = Math.abs(d.x - d.x0) + Math.abs(d.y - d.y0);
-      if (d.type === 'touch') { if (!d.ready) { if (moved > 8) abort(); return; } start(); }
+      if (d.type === 'touch') { if (!d.ready) { if (moved > 8) abort(); return; } if (moved < 4) return; start(); }
       else if (moved > 5) start();
       else return;
     }
@@ -224,10 +225,12 @@
     announce('Dropped at position ' + (ni + 1));
   }
   document.addEventListener('keydown', function (e) {
+    if (e.defaultPrevented) return;
     var item = e.target.closest && e.target.closest(ITEM);
     if (!item || e.target !== item) return;
     var c = item.parentElement; if (!c || !c.hasAttribute('data-sortable')) return;
     if (!kb) {
+      if (c.getAttribute('data-sortable-keyboard') === 'off') return;
       if (e.key === ' ' || e.key === 'Enter') {
         if (e.key === 'Enter' && item.hasAttribute('data-editable')) return;
         e.preventDefault();
@@ -365,7 +368,7 @@
     $$('.menu:not([hidden])').forEach(function (m) {
       if (m === except) return;
       m.hidden = true;
-      var b = m.__btn; if (b) { b.setAttribute('aria-expanded', 'false'); if (refocus) b.focus(); }
+      var b = m.__btn; if (b) { b.setAttribute('aria-expanded', 'false'); if (refocus && (m.contains(document.activeElement) || document.activeElement === document.body)) b.focus(); }
     });
   }
   function openMenu(btn, m, focusFirst) {
