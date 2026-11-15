@@ -5,3 +5,9 @@
 .g-dialog { animation: none; margin-bottom: 16px; }
 .g-toast { display: inline-flex; animation: none; }
 .g-gap { margin-top: 16px; }
+.g-help { color: var(--muted); font-size: .8125rem; margin: 0 0 12px; }
+.g-help kbd { font-family: var(--mono); font-size: .75rem; padding: 1px 5px; border: 1px solid var(--border-strong); border-radius: 4px; background: var(--surface-2); }
+.g-log { display: block; font-family: var(--mono); font-size: .75rem; color: var(--muted); padding: 10px 12px; background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--r-md); min-height: 40px; }
+.g-skels { display: grid; gap: 8px; max-width: 360px; }
+.g-sk1 { height: 14px; width: 70%; }
+.g-sk2 { height: 14px; width: 45%; }

@@ -52,3 +52,25 @@ Section order (fixed — drop sections, don't reorder): **top bar → hero → d
 - **Legal:** `privacy.html` and `terms.html` use `.doc`; link them in the footer (and from OAuth consent screens if needed).
 - **Accent:** one per product via `data-accent`; add new accents as colour-only blocks (see above). Don't restyle components per product.
 - **Rules:** no inline `<script>`/`style=""`; theme differences are colour only (verify computed styles in both themes); check at 375px width — no horizontal scroll.
+
+## Behaviours (`src/behaviors.js`)
+
+Dependency-free, CSP-safe, wired by attributes; results are bubbling `CustomEvent`s. The kit never persists anything — listen and save in your app. Load at the end of `<body>`; `theme.js` stays in `<head>`.
+
+| Behaviour | Markup | Events / API |
+|---|---|---|
+| **Sort** (drag) | container `[data-sortable][data-sortable-group][data-sortable-axis="x"][data-sortable-handle]`, items `[data-sortable-item]` (direct children; `[data-handle]`, `[data-no-drag]`) | `nimble:sort {item, from, to, oldIndex, newIndex}` on the target container. Mouse/pen: 5px threshold · touch: 250ms long-press · autoscroll at edges · Esc cancels · keyboard: Space/Enter grab, arrows move (←/→ across lists), Space/Enter drop, Esc cancel · screen-reader announcements |
+| **Edit** (inline) | `[data-editable]` / `="multiline"`, `data-maxlength`, `data-allow-empty`, `[data-edit-trigger="#id"]` | dblclick / Enter / F2; Enter saves (multiline Ctrl/Cmd+Enter), Esc cancels, blur saves · `nimble:edit {value, oldValue}` (cancelable) · `NimbleUI.edit(el)` |
+| **Dialog** | `.overlay[hidden] > .dialog`, `[data-dialog-open="#id"]`, `[data-dialog-close][data-dialog-result]`, `[data-static]` | focus trap, Esc/backdrop close, focus returns to opener · `nimble:dialogopen`, `nimble:dialogclose {result}` (cancelable) · `NimbleUI.dialog.open/close` |
+| **Confirm** | — | `NimbleUI.confirm({title, message, confirmLabel, cancelLabel, danger}) → Promise<boolean>` |
+| **Menu** | `.menu-wrap > button[data-menu-toggle="#id"] + .menu[hidden] > .menu__item[role=menuitem][data-value]` | arrows/Home/End/Esc, outside click · `nimble:menuselect {item, value}` |
+| **Tabs** | `[data-tabs] > .tabs__list[role=tablist] > .tab[role=tab][aria-controls]` + `[role=tabpanel]` | arrows/Home/End · `nimble:tab {tab, panel}` |
+| **Toast** | — | `NimbleUI.toast(text, {tone: 'warn', duration})` |
+
+Dynamic content: a `MutationObserver` makes new sortable/editable nodes focusable; call `NimbleUI.init(root)` after inserting tabs.
+
+Extra components (CSS only): `.switch`, `.check`, `.radio` (+ `.opt` label), `.spinner`, `.skeleton`, `.sync[data-state=saved|saving|offline|error]`, `.list/.listrow`, `[data-tip]` tooltip, `.menu`, `.tabs__list/.tab`, `.sr-only`.
+
+## Theme and density
+
+`theme.js`: preference `auto | light | dark` (default **auto** = `prefers-color-scheme`), stored in `localStorage['nimble-theme']`; sets `data-theme` (resolved) and `data-theme-pref`. `[data-theme-toggle]` flips; `[data-theme-set="auto|light|dark"]` sets (and gets `aria-pressed`). `data-density="compact"` on `<html>` or a wrapper shrinks controls (`--ctl-h 30`, `--field-h 32`, `--fs .8125rem`) — a size, never tied to the theme.

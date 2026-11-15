@@ -7,7 +7,7 @@
 4. **One accent per product** via `data-accent`: emerald (Roadmaps), rose (Taskboards), indigo (Diagramico). Accent = 6 tokens.
 5. **No inline script / `style=""`** (CSP). State via attributes (`aria-pressed`, `hidden`, `data-*`).
 6. **Product page template** with fixed section order; template + recipe in the repo and the skill.
-7. **Next:** `behaviors.js` (drag/sort, inline edit, dialogs, menus) + missing components (switch, checkbox, tabs, list rows, spinner/skeleton, sync chip).
+7. **Done:** `behaviors.js` (sort, edit, dialog, confirm, menu, tabs, toast), switch/check/radio, spinner, skeleton, sync chip, list rows, tooltip, auto theme, compact density. Verified in the gallery: 0 non-colour diffs across 3 accents × 2 densities.
 
 ## Decided (2026-11-15, after the audit)
 - **A. Scope: unify all apps.** nimbleUI becomes the base of the Roadmaps, Taskboards and Diagramico apps. One font stack (Inter + JetBrains Mono); Figtree and IBM Plex are retired. Diagramico's 13px/dense editor UI becomes an opt-in `data-density="compact"` (size change, never tied to theme). Migration of the Taskboards and Diagramico apps is a separate, per-repo task (visual regression risk).

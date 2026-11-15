@@ -27,6 +27,15 @@ Fontes (opcional): Google Fonts Inter 400–700 + JetBrains Mono 400/500.
 - Landing: `.lp-hero` (h1 com `<em>` = acento), `.lp-sec/.lp-head`, `.grid2/.grid3`, `.fcard`, `.steps/.step`, `.snippet`, `.lp-foot`; páginas legais `.doc`.
 - Tokens: superfícies `--bg --surface --surface-2 --surface-3 --border --border-strong`; texto `--text --muted --subtle`; acento `--primary --primary-h --primary-fg --primary-ink --primary-soft --glow`; semântica `--success --info --warn --danger`; estado `--now --next --later`; geometria `--r-sm|md|lg|xl --ring --fast --norm --sh-sm|md|lg`.
 
+## Comportamentos (`behaviors.js`, no fim do `<body>`; `theme.js` no `<head>`)
+Por atributos, sem dependências, resultados em `CustomEvent` (a app persiste; o kit nunca guarda nada):
+- **Drag/ordenar:** contentor `[data-sortable][data-sortable-group="g"]` (`data-sortable-axis="x"`, `data-sortable-handle`), itens filhos diretos `[data-sortable-item]` (`[data-no-drag]` exclui). Pointer events (rato 5px, toque long-press 250ms, autoscroll, Esc cancela); teclado: Espaço agarra, setas movem (←/→ entre listas), Espaço larga. Evento `nimble:sort {item,from,to,oldIndex,newIndex}`. Indicador = `.drop-slot`, nunca `style` inline.
+- **Editar inline:** `[data-editable]` (`="multiline"`, `data-maxlength`, `data-allow-empty`); duplo clique/Enter/F2, Enter grava, Esc cancela; `nimble:edit {value,oldValue}` (cancelável).
+- **Diálogo:** `.overlay[hidden] > .dialog` + `[data-dialog-open="#id"]` / `[data-dialog-close][data-dialog-result]`; foco preso e devolvido; `nimble:dialogclose {result}`. `NimbleUI.confirm({title,message,confirmLabel,danger})` → Promise<boolean>. `NimbleUI.toast(texto,{tone:'warn'})`.
+- **Menu:** `.menu-wrap > [data-menu-toggle="#id"] + .menu[hidden] > .menu__item[role=menuitem][data-value]` → `nimble:menuselect`. **Tabs:** `[data-tabs] > .tabs__list[role=tablist] > .tab[role=tab][aria-controls]` + `[role=tabpanel]`.
+- **Só CSS:** `.switch/.check/.radio` (+`.opt`), `.spinner`, `.skeleton`, `.sync[data-state=saved|saving|offline|error]`, `.list/.listrow`, `[data-tip]`, `.sr-only`.
+- **Tema:** `theme.js` → `auto|light|dark` (por defeito **auto**); `[data-theme-toggle]`, `[data-theme-set="auto|light|dark"]`. **Densidade:** `data-density="compact"` (só tamanhos). Decisões e histórico em `docs/DECISIONS.md` do repo.
+
 ## Página de produto
 Template pronto: `templates/product-page/` do repo (cópia em `assets/product-page/` desta skill): `index.html`, `privacy.html`, `terms.html`. Copiar, substituir todos os `{{PLACEHOLDER}}`, definir `data-accent`, ajustar os 3 caminhos `../../src/`.
 Ordem fixa: barra → hero (eyebrow com 3 factos, h1 com `<em>` no resultado, 1 parágrafo ≤ 40 palavras, CTA primário + outline, linha de confiança) → demo estática real → 3 `fcard` → `steps` (+ `snippet`) → 2 `fcard` de confiança → CTA final → rodapé com Privacy/Terms. Retirar secções, não reordenar. Mesmo texto de CTA em cima, no hero e no fim; benefícios, não mecanismos. Detalhe em `docs/DESIGN-SYSTEM.md`.

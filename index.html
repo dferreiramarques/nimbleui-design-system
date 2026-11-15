@@ -21,7 +21,12 @@
     <button class="seg__btn" data-acc="rose" aria-pressed="false">Rose</button>
     <button class="seg__btn" data-acc="indigo" aria-pressed="false">Indigo</button>
   </div>
-  <button class="btn btn--outline btn--sm" data-theme-toggle>Light / Dark</button>
+  <div class="seg" role="group" aria-label="Theme">
+    <button class="seg__btn" data-theme-set="auto" aria-pressed="false">Auto</button>
+    <button class="seg__btn" data-theme-set="light" aria-pressed="false">Light</button>
+    <button class="seg__btn" data-theme-set="dark" aria-pressed="false">Dark</button>
+  </div>
+  <button class="btn btn--outline btn--sm" id="density" aria-pressed="false">Compact</button>
 </div></header>
 
 <main class="wrap">
@@ -50,17 +55,76 @@
     </div>
   </section>
 
-  <section class="g-sec"><h2>Board</h2>
+  <section class="g-sec"><h2>Board — drag, edit</h2>
+    <p class="g-help">Drag a card (mouse: move 5px · touch: long-press). Keyboard: focus a card, <kbd>Space</kbd> to grab, arrows to move (← → change column), <kbd>Space</kbd> to drop, <kbd>Esc</kbd> cancels. Double-click or <kbd>F2</kbd> a title to edit.</p>
     <div class="cols">
       <div class="col" data-col="now"><div class="col__head"><span class="col__dot"></span><span class="col__title">Now</span><span class="col__count">2</span></div>
-        <div class="col__list">
-          <div class="card"><div class="card__title">Ship the editor</div><div class="card__desc">Drag cards between columns.</div><div class="card__foot"><span class="tag" data-tone="success">ready</span></div></div>
-          <div class="card"><div class="card__title">Fix sync conflict</div><div class="card__foot"><span class="tag" data-tone="danger">bug</span></div></div>
+        <div class="col__list" data-sortable data-sortable-group="board">
+          <div class="card" data-sortable-item><div class="card__title" data-editable>Ship the editor</div><div class="card__desc">Drag cards between columns.</div><div class="card__foot"><span class="tag" data-tone="success">ready</span></div></div>
+          <div class="card" data-sortable-item><div class="card__title" data-editable>Fix sync conflict</div><div class="card__foot"><span class="tag" data-tone="danger">bug</span></div></div>
         </div></div>
       <div class="col" data-col="next"><div class="col__head"><span class="col__dot"></span><span class="col__title">Next</span><span class="col__count">1</span></div>
-        <div class="col__list"><div class="card"><div class="card__title">Public embed</div><div class="card__foot"><span class="tag" data-tone="info">idea</span></div></div></div></div>
-      <div class="col over" data-col="later"><div class="col__head"><span class="col__dot"></span><span class="col__title">Later</span><span class="col__count">0</span></div>
-        <div class="col__list"><div class="empty">Drop a card here</div></div></div>
+        <div class="col__list" data-sortable data-sortable-group="board"><div class="card" data-sortable-item><div class="card__title" data-editable>Public embed</div><div class="card__foot"><span class="tag" data-tone="info">idea</span></div></div></div></div>
+      <div class="col" data-col="later"><div class="col__head"><span class="col__dot"></span><span class="col__title">Later</span><span class="col__count">1</span></div>
+        <div class="col__list" data-sortable data-sortable-group="board"><div class="card" data-sortable-item><div class="card__title" data-editable>Mobile apps</div><div class="card__foot"><span class="tag" data-tone="secondary">exploring</span></div></div></div></div>
+    </div>
+    <p class="g-help">Horizontal list (axis x):</p>
+    <div class="g-row" data-sortable data-sortable-axis="x" data-sortable-group="chips">
+      <span class="chip chip--info" data-sortable-item>Alpha</span><span class="chip chip--ok" data-sortable-item>Beta</span><span class="chip" data-sortable-item>Gamma</span><span class="chip chip--danger" data-sortable-item>Delta</span>
+    </div>
+    <p class="g-help g-gap">Event log:</p>
+    <output class="g-log" id="log" aria-live="polite">—</output>
+  </section>
+
+  <section class="g-sec"><h2>Dialog, confirm, toast, menu, tooltip</h2>
+    <div class="g-row">
+      <button class="btn btn--outline" data-dialog-open="#dlg-edit">Open dialog</button>
+      <button class="btn btn--danger" id="ask-del">Confirm delete…</button>
+      <button class="btn btn--outline" id="show-toast">Toast</button>
+      <span class="menu-wrap">
+        <button class="btn btn--outline" data-menu-toggle="#menu1" aria-haspopup="menu" aria-expanded="false">Menu</button>
+        <div class="menu" id="menu1" hidden>
+          <button class="menu__item" role="menuitem" data-value="rename">Rename</button>
+          <button class="menu__item" role="menuitem" data-value="duplicate">Duplicate</button>
+          <div class="menu__sep"></div>
+          <button class="menu__item menu__item--danger" role="menuitem" data-value="delete">Delete</button>
+        </div>
+      </span>
+      <button class="btn btn--outline btn--icon" data-tip="Tooltip on hover/focus" aria-label="Info"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v5h1"/></svg></button>
+    </div>
+    <div class="overlay" id="dlg-edit" hidden>
+      <div class="dialog">
+        <div class="dialog__head"><h2 class="dialog__title">Edit card</h2></div>
+        <div class="dialog__body"><div class="field"><label for="d-title">Title</label><input id="d-title" class="input" value="Ship the editor"></div></div>
+        <div class="dialog__foot"><button class="btn btn--outline" data-dialog-close>Cancel</button><button class="btn btn--primary" data-dialog-close data-dialog-result="save">Save</button></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="g-sec"><h2>Tabs, controls, loading, lists</h2>
+    <div data-tabs>
+      <div class="tabs__list" role="tablist" aria-label="Demo">
+        <button class="tab" role="tab" id="t1" aria-controls="p1" aria-selected="true">Overview</button>
+        <button class="tab" role="tab" id="t2" aria-controls="p2" aria-selected="false">Activity</button>
+        <button class="tab" role="tab" id="t3" aria-controls="p3" aria-selected="false">Settings</button>
+      </div>
+      <div class="tabs__panel" role="tabpanel" id="p1" aria-labelledby="t1">Overview panel. Arrow keys, Home and End move between tabs.</div>
+      <div class="tabs__panel" role="tabpanel" id="p2" aria-labelledby="t2" hidden>Activity panel.</div>
+      <div class="tabs__panel" role="tabpanel" id="p3" aria-labelledby="t3" hidden>Settings panel.</div>
+    </div>
+    <div class="g-row g-gap">
+      <label class="opt"><input type="checkbox" class="switch" checked> Switch</label>
+      <label class="opt"><input type="checkbox" class="check" checked> Checkbox</label>
+      <label class="opt"><input type="radio" name="r" class="radio" checked> Radio A</label>
+      <label class="opt"><input type="radio" name="r" class="radio"> Radio B</label>
+      <label class="opt"><input type="checkbox" class="switch" disabled> Disabled</label>
+      <span class="spinner" role="status" aria-label="Loading"></span>
+      <span class="sync" data-state="saved">Saved</span><span class="sync" data-state="saving">Saving…</span><span class="sync" data-state="offline">Offline</span><span class="sync" data-state="error">Error</span>
+    </div>
+    <div class="g-skels g-gap"><span class="skeleton g-sk1"></span><span class="skeleton g-sk2"></span></div>
+    <div class="list g-gap">
+      <div class="listrow"><div class="listrow__main"><div class="listrow__title">Product roadmap</div><div class="listrow__sub">Updated 2 hours ago</div></div><span class="tag" data-tone="success">public</span><div class="listrow__actions"><button class="btn btn--text btn--icon btn--sm" aria-label="More">⋯</button></div></div>
+      <div class="listrow"><div class="listrow__main"><div class="listrow__title">Q3 planning</div><div class="listrow__sub">Private</div></div><span class="tag" data-tone="secondary">private</span><div class="listrow__actions"><button class="btn btn--text btn--icon btn--sm" aria-label="More">⋯</button></div></div>
     </div>
   </section>
 
@@ -72,7 +136,7 @@
     </div>
   </section>
 
-  <section class="g-sec"><h2>Dialog &amp; toast</h2>
+  <section class="g-sec"><h2>Dialog &amp; toast (static)</h2>
     <div class="dialog g-dialog">
       <div class="dialog__head"><h3 class="dialog__title">Delete roadmap?</h3></div>
       <div class="dialog__body"><p class="dialog__msg">This also removes its public copy.</p></div>
@@ -85,15 +149,17 @@
     <div class="grid3">
       <div class="fcard"><div class="fcard__ico"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h8l-1 8 10-12h-8z"/></svg></div><h3>Fast</h3><p>No build step, no dependencies.</p></div>
       <div class="fcard"><div class="fcard__ico"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3v18"/></svg></div><h3>Two themes</h3><p>Only colours change.</p></div>
-      <div class="fcard"><div class="fcard__ico"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/></svg></div><h3>Three accents</h3><p>Swap five tokens.</p></div>
+      <div class="fcard"><div class="fcard__ico"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/></svg></div><h3>Three accents</h3><p>Swap six tokens.</p></div>
     </div>
-    <div class="steps g-gap"><div class="step"><h3>Link</h3><p>tokens + components.</p></div><div class="step"><h3>Theme</h3><p>theme.js.</p></div><div class="step"><h3>Accent</h3><p>data-accent.</p></div><div class="step"><h3>Ship</h3><p>No extra CSS.</p></div></div>
+    <div class="steps g-gap"><div class="step"><h3>Link</h3><p>tokens + components.</p></div><div class="step"><h3>Theme</h3><p>theme.js.</p></div><div class="step"><h3>Behave</h3><p>behaviors.js.</p></div><div class="step"><h3>Ship</h3><p>No extra CSS.</p></div></div>
     <div class="snippet g-gap"><pre>&lt;link rel="stylesheet" href="src/tokens.css"&gt;
 &lt;link rel="stylesheet" href="src/components.css"&gt;
-&lt;script src="src/theme.js"&gt;&lt;/script&gt;</pre></div>
+&lt;script src="src/theme.js"&gt;&lt;/script&gt;      &lt;!-- in &lt;head&gt; --&gt;
+&lt;script src="src/behaviors.js"&gt;&lt;/script&gt;  &lt;!-- end of &lt;body&gt; --&gt;</pre></div>
   </section>
 </main>
 <footer class="lp-foot"><div class="wrap"><span>nimbleUI design system · MIT</span><a href="docs/DESIGN-SYSTEM.md">Rationale</a></div></footer>
+<script src="src/behaviors.js"></script>
 <script src="gallery.js"></script>
 </body>
 </html>
