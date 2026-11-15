@@ -1,0 +1,7 @@
+{
+  "name": "nimbleui-design-system",
+  "version": "1.0.0",
+  "description": "nimbleUI: tokens + components extracted from Roadmaps, Taskboards and Diagramico. Dark/light change only colours.",
+  "license": "MIT",
+  "files": ["src", "docs", "skill"]
+}

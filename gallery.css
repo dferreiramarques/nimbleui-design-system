@@ -1,0 +1,7 @@
+.g-sec { padding: 28px 0; border-top: 1px solid var(--border); }
+.g-sec > h2 { font-size: 1.125rem; font-weight: 600; margin-bottom: 16px; }
+.g-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.g-form { display: grid; gap: 16px; max-width: 420px; }
+.g-dialog { animation: none; margin-bottom: 16px; }
+.g-toast { display: inline-flex; animation: none; }
+.g-gap { margin-top: 16px; }

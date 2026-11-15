@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>nimbleUI design system</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="src/tokens.css">
+<link rel="stylesheet" href="src/components.css">
+<link rel="stylesheet" href="gallery.css">
+<script src="src/theme.js"></script>
+</head>
+<body>
+<header class="topbar"><div class="wrap topbar__in">
+  <span class="brand"><span class="brand__mark"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4 10-10"/></svg></span>nimbleUI</span>
+  <span class="grow"></span>
+  <div class="seg" role="group" aria-label="Accent">
+    <button class="seg__btn" data-acc="" aria-pressed="true">Emerald</button>
+    <button class="seg__btn" data-acc="rose" aria-pressed="false">Rose</button>
+    <button class="seg__btn" data-acc="indigo" aria-pressed="false">Indigo</button>
+  </div>
+  <button class="btn btn--outline btn--sm" data-theme-toggle>Light / Dark</button>
+</div></header>
+
+<main class="wrap">
+  <section class="hero">
+    <span class="eyebrow">Design system</span>
+    <h1>Small, calm, colour-only theming.</h1>
+    <p class="hero__tag">Extracted from Roadmaps, Taskboards and Diagramico. One structure, three accents; dark and light differ <em>only</em> in colour.</p>
+  </section>
+
+  <section class="g-sec"><h2>Buttons</h2>
+    <div class="g-row">
+      <button class="btn btn--primary">Primary</button>
+      <button class="btn btn--outline">Outline</button>
+      <button class="btn btn--text">Text</button>
+      <button class="btn btn--danger">Danger</button>
+      <button class="btn btn--primary btn--sm">Small</button>
+      <button class="btn btn--primary btn--lg">Large</button>
+      <button class="btn btn--outline" disabled>Disabled</button>
+    </div>
+  </section>
+
+  <section class="g-sec"><h2>Chips, tags, eyebrow</h2>
+    <div class="g-row">
+      <span class="chip">Pending</span><span class="chip chip--ok">Saved</span><span class="chip chip--info">Info</span><span class="chip chip--danger">Error</span><span class="chip chip--muted">Muted</span>
+      <span class="tag" data-tone="success">success</span><span class="tag" data-tone="info">info</span><span class="tag" data-tone="warn">warn</span><span class="tag" data-tone="danger">danger</span><span class="tag" data-tone="secondary">secondary</span><span class="tag" data-tone="contrast">contrast</span>
+    </div>
+  </section>
+
+  <section class="g-sec"><h2>Board</h2>
+    <div class="cols">
+      <div class="col" data-col="now"><div class="col__head"><span class="col__dot"></span><span class="col__title">Now</span><span class="col__count">2</span></div>
+        <div class="col__list">
+          <div class="card"><div class="card__title">Ship the editor</div><div class="card__desc">Drag cards between columns.</div><div class="card__foot"><span class="tag" data-tone="success">ready</span></div></div>
+          <div class="card"><div class="card__title">Fix sync conflict</div><div class="card__foot"><span class="tag" data-tone="danger">bug</span></div></div>
+        </div></div>
+      <div class="col" data-col="next"><div class="col__head"><span class="col__dot"></span><span class="col__title">Next</span><span class="col__count">1</span></div>
+        <div class="col__list"><div class="card"><div class="card__title">Public embed</div><div class="card__foot"><span class="tag" data-tone="info">idea</span></div></div></div></div>
+      <div class="col over" data-col="later"><div class="col__head"><span class="col__dot"></span><span class="col__title">Later</span><span class="col__count">0</span></div>
+        <div class="col__list"><div class="empty">Drop a card here</div></div></div>
+    </div>
+  </section>
+
+  <section class="g-sec"><h2>Forms</h2>
+    <div class="g-form">
+      <div class="field"><label for="f1">Title</label><input id="f1" class="input" placeholder="Name your card"><span class="field__hint">Short and specific.</span></div>
+      <div class="field"><label for="f2">Invalid</label><input id="f2" class="input" aria-invalid="true" value="oops"></div>
+      <div class="field"><label for="f3">Notes</label><textarea id="f3" class="textarea" placeholder="Details"></textarea></div>
+    </div>
+  </section>
+
+  <section class="g-sec"><h2>Dialog &amp; toast</h2>
+    <div class="dialog g-dialog">
+      <div class="dialog__head"><h3 class="dialog__title">Delete roadmap?</h3></div>
+      <div class="dialog__body"><p class="dialog__msg">This also removes its public copy.</p></div>
+      <div class="dialog__foot"><button class="btn btn--outline">Cancel</button><button class="btn btn--danger">Delete</button></div>
+    </div>
+    <div class="toast g-toast"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4 10-10"/></svg>Saved to Drive</div>
+  </section>
+
+  <section class="g-sec"><h2>Landing blocks</h2>
+    <div class="grid3">
+      <div class="fcard"><div class="fcard__ico"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h8l-1 8 10-12h-8z"/></svg></div><h3>Fast</h3><p>No build step, no dependencies.</p></div>
+      <div class="fcard"><div class="fcard__ico"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3v18"/></svg></div><h3>Two themes</h3><p>Only colours change.</p></div>
+      <div class="fcard"><div class="fcard__ico"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/></svg></div><h3>Three accents</h3><p>Swap five tokens.</p></div>
+    </div>
+    <div class="steps g-gap"><div class="step"><h3>Link</h3><p>tokens + components.</p></div><div class="step"><h3>Theme</h3><p>theme.js.</p></div><div class="step"><h3>Accent</h3><p>data-accent.</p></div><div class="step"><h3>Ship</h3><p>No extra CSS.</p></div></div>
+    <div class="snippet g-gap"><pre>&lt;link rel="stylesheet" href="src/tokens.css"&gt;
+&lt;link rel="stylesheet" href="src/components.css"&gt;
+&lt;script src="src/theme.js"&gt;&lt;/script&gt;</pre></div>
+  </section>
+</main>
+<footer class="lp-foot"><div class="wrap"><span>nimbleUI design system · MIT</span><a href="docs/DESIGN-SYSTEM.md">Rationale</a></div></footer>
+<script src="gallery.js"></script>
+</body>
+</html>
