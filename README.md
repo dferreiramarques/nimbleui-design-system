@@ -16,6 +16,8 @@ Dark and light differ **only in colour**; three accents (emerald, rose, indigo) 
 - `src/behaviors.js` — attribute-driven behaviours (sort/drag, inline edit, dialog, confirm, menu, tabs, toast); see docs
 - `index.html` — live gallery (open it, toggle theme/accent)
 - `docs/DESIGN-SYSTEM.md` — principles, tokens, how to add an accent
+- `docs/PATTERNS.md` — the complex UI patterns of the apps (shell, account menu, board, tabs, shelves, matrix, drawer, share, sync/conflicts…) + legacy→nimbleUI migration map
+- `docs/DECISIONS.md` — decisions log
 - `templates/product-page/` — product page template (+ privacy/terms), copy and fill `{{PLACEHOLDER}}`
 - `skill/SKILL.md` — Claude Code skill (`nimbleui-design-system`); copy the `skill/` folder to `~/.claude/skills/nimbleui-design-system/`
 

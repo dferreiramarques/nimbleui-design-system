@@ -36,6 +36,9 @@ Por atributos, sem dependências, resultados em `CustomEvent` (a app persiste; o
 - **Só CSS:** `.switch/.check/.radio` (+`.opt`), `.spinner`, `.skeleton`, `.sync[data-state=saved|saving|offline|error]`, `.list/.listrow`, `[data-tip]`, `.sr-only`.
 - **Tema:** `theme.js` → `auto|light|dark` (por defeito **auto**); `[data-theme-toggle]`, `[data-theme-set="auto|light|dark"]`. **Densidade:** `data-density="compact"` (só tamanhos). Decisões e histórico em `docs/DECISIONS.md` do repo.
 
+## Padrões (`docs/PATTERNS.md`, cópia em `assets/PATTERNS.md`)
+Composições complexas das apps, com origem, markup e estado (kit / css-todo): shell de app e fluxo mobile (≤700px: só item aberto + ‹ › + ☰), shell de editor com painéis flutuantes, menu de conta, gate de login e estado vazio, board (colunas+cartões+drag+edição), diálogo de item, tabs coloridas ordenáveis, shelves/alvos de drop, matriz 2×2, chips de filtro, drawer/lista de documentos, barra contextual, partilha/embed, estado de sync e conflitos, ações destrutivas (confirm/undo), import/export e drop de ficheiros, ajuda/tour, changelog. Termina com o **mapa de migração** (classes/tokens legados → nimbleUI). Consultar antes de migrar uma app ou criar um ecrã complexo.
+
 ## Página de produto
 Template pronto: `templates/product-page/` do repo (cópia em `assets/product-page/` desta skill): `index.html`, `privacy.html`, `terms.html`. Copiar, substituir todos os `{{PLACEHOLDER}}`, definir `data-accent`, ajustar os 3 caminhos `../../src/`.
 Ordem fixa: barra → hero (eyebrow com 3 factos, h1 com `<em>` no resultado, 1 parágrafo ≤ 40 palavras, CTA primário + outline, linha de confiança) → demo estática real → 3 `fcard` → `steps` (+ `snippet`) → 2 `fcard` de confiança → CTA final → rodapé com Privacy/Terms. Retirar secções, não reordenar. Mesmo texto de CTA em cima, no hero e no fim; benefícios, não mecanismos. Detalhe em `docs/DESIGN-SYSTEM.md`.

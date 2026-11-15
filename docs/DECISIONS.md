@@ -7,6 +7,7 @@
 4. **One accent per product** via `data-accent`: emerald (Roadmaps), rose (Taskboards), indigo (Diagramico). Accent = 6 tokens.
 5. **No inline script / `style=""`** (CSP). State via attributes (`aria-pressed`, `hidden`, `data-*`).
 6. **Product page template** with fixed section order; template + recipe in the repo and the skill.
+8. **Patterns documented** in `docs/PATTERNS.md` (18 patterns + migration map); css-todo ones get CSS when their app is migrated.
 7. **Done:** `behaviors.js` (sort, edit, dialog, confirm, menu, tabs, toast), switch/check/radio, spinner, skeleton, sync chip, list rows, tooltip, auto theme, compact density. Verified in the gallery: 0 non-colour diffs across 3 accents × 2 densities.
 
 ## Decided (2026-11-15, after the audit)
