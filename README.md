@@ -12,7 +12,7 @@ Dark and light differ **only in colour**; three accents (emerald, rose, indigo) 
 ```
 
 - `src/tokens.css` — colour tokens per theme + geometry once in `:root`
-- `src/components.css` — top bar, buttons, segmented, chips/tags, board, forms, dialog, toast, landing blocks
+- `src/css/{base,controls,overlays,board,page}.css` — the kit's CSS in modules; `src/components.css` is the whole kit generated from them (`node tools/build-css.mjs`). Take `components.css`, or `tokens.css` + only the modules you need (`base.css` is the reset: skip it in an app that has its own)
 - `src/behaviors.js` — attribute-driven behaviours (sort/drag, inline edit, dialog, confirm, menu, tabs, toast); see docs
 - `index.html` — live gallery (open it, toggle theme/accent)
 - `docs/DESIGN-SYSTEM.md` — principles, tokens, how to add an accent

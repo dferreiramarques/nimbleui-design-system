@@ -93,3 +93,17 @@ Built into `components.css`; keep them when adding components:
 
 - Load `components.layered.css` instead of `components.css`: the kit goes into the `nimble` cascade layer, so the app's un-layered rules win over same-named classes (`.card`, `.toast`, `.topbar`). Anything the app does not set still falls through, so measure (computed-style diff before/after) and add overrides where needed (for example `button, input { line-height: normal }`, or `.card__actions { opacity: 1 }` when the kit would hide it).
 - Dialogs can keep the app's own markup: `overlay[data-dialog-overlay][hidden] > panel[data-dialog-panel]`, `[data-dialog-close]` on the close buttons; open and close with `NimbleUI.dialog.open/close` and listen to `nimble:dialogclose` to reset state (it also fires on Esc and backdrop clicks).
+
+## CSS modules
+
+`src/css/*.css` are the sources; `src/components.css` is generated from them (`node tools/build-css.mjs`, `--check` in CI) and is byte-for-byte the whole kit, so existing apps keep working. Pick modules when you cannot take everything:
+
+| Module | Contains | Pairs with |
+|---|---|---|
+| `base.css` | reset (`box-sizing`, `margin`), body type and background, focus ring, `.wrap .ico .grow .mono .dim .sr-only`, reduced motion | everything (skip in apps with their own reset) |
+| `controls.css` | `.btn`, `.seg`, `.chip/.tag/.eyebrow`, forms, `.tab`, `.switch/.check/.radio`, spinner/skeleton/sync, tooltip, inline edit | `behaviors.js` (edit, tabs) |
+| `overlays.css` | `.overlay/.dialog`, `.toasts/.toast`, `.menu` | `behaviors.js` (dialog, confirm, toast, menu) |
+| `board.css` | `.cols/.col/.card`, `.empty`, `.drop-slot`, `.drag-ghost`, `.list/.listrow` | `behaviors.js` (sort) |
+| `page.css` | `.topbar/.brand/.nav`, `.hero`, landing blocks, `.doc` | — |
+
+Example (a dense editor with its own reset that only needs toasts and dialogs): `tokens.css` + `overlays.css` + `behaviors.js`, then override what the app wants (colours, position) in its own CSS.

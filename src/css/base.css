@@ -1,0 +1,37 @@
+/* nimbleUI · base — reset, document defaults, focus ring, utilities (.wrap .ico .grow .mono .dim .sr-only), reduced motion. Load first; skip it in an app that has its own reset.
+   Needs tokens.css. Generated into components.css by tools/build-css.mjs (edit this file, then run the script). */
+* { box-sizing: border-box; margin: 0; }
+[hidden] { display: none !important; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+
+body {
+  min-height: 100vh;
+  font-family: var(--font);
+  font-size: var(--fs);
+  line-height: 1.55;
+  color: var(--text);
+  background: var(--bg);
+  background-image: radial-gradient(60% 420px at 50% -80px, var(--glow), transparent);
+  background-repeat: no-repeat;
+  -webkit-font-smoothing: antialiased;
+  overflow-wrap: anywhere;      /* long names, URLs, ids wrap instead of widening the page */
+  overflow-x: clip;             /* safety net only: the rules below are what keep layouts inside the viewport */
+}
+pre, code, .snippet, .mono { overflow-wrap: normal; }
+button, input, select, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 24px; }
+.ico { width: 1.1em; height: 1.1em; flex-shrink: 0; }
+.grow { flex: 1 1 auto; }
+.mono { font-family: var(--mono); font-size: .8125rem; }
+.dim { color: var(--subtle) !important; }
+
+/* utilities and dialog scroll lock */
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+body.has-dialog { overflow: hidden; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}

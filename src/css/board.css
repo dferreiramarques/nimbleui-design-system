@@ -1,0 +1,52 @@
+/* nimbleUI · board — .cols/.col/.card, .empty, sortable support (.drop-slot, .drag-ghost, .is-dragging), .list/.listrow. Pairs with behaviors.js (sort).
+   Needs tokens.css. Generated into components.css by tools/build-css.mjs (edit this file, then run the script). */
+/* ── Board: columns + cards ──────────────────────────────────────────────── */
+.cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; padding-bottom: 56px; align-items: start; }
+@media (max-width: 900px) { .cols { grid-template-columns: minmax(0, 1fr); } }
+.col { --col: var(--now); background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--r-xl); padding: 14px; transition: border-color var(--fast), background var(--fast), box-shadow var(--fast); }
+.col[data-col="next"] { --col: var(--next); }
+.col[data-col="later"] { --col: var(--later); }
+.col.over { border-color: var(--primary); background: color-mix(in srgb, var(--primary) 7%, var(--surface-2)); box-shadow: 0 0 0 var(--ring) var(--primary-soft); }
+.col__head { display: flex; align-items: center; gap: 10px; padding: 4px 4px 14px; }
+.col__dot { width: 10px; height: 10px; border-radius: 50%; background: var(--col); box-shadow: 0 0 0 4px color-mix(in srgb, var(--col) 22%, transparent); flex-shrink: 0; }
+.col__title { font-size: .8125rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.col__sub { color: var(--subtle); font-size: .8125rem; }
+.col__count { min-width: 22px; height: 22px; padding: 0 7px; margin-left: auto; display: inline-grid; place-items: center; background: var(--surface-3); color: var(--muted); border-radius: 999px; font-size: .75rem; font-weight: 600; }
+.col__list { display: flex; flex-direction: column; gap: 10px; min-height: 64px; }
+
+.col, .col__list, .card, .fcard, .step, .field, .listrow__main { min-width: 0; }
+.card { position: relative; background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 14px 16px; box-shadow: var(--sh-sm); transition: border-color var(--fast), box-shadow var(--fast), opacity var(--fast); }
+.card:hover { border-color: var(--border-strong); box-shadow: var(--sh-md); }
+.card__title { font-size: .9375rem; font-weight: 600; letter-spacing: -.005em; line-height: 1.35; }
+.card__desc { margin-top: 4px; color: var(--muted); font-size: .8125rem; line-height: 1.5; }
+.card__foot { margin-top: 12px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; min-height: 26px; }
+.card__actions { display: flex; align-items: center; gap: 2px; margin-left: auto; opacity: 0; transition: opacity var(--fast); }
+.card:hover .card__actions, .card:focus-within .card__actions { opacity: 1; }
+@media (hover: none) { .card__actions { opacity: 1; } }
+.drop-slot { height: 3px; border-radius: 2px; background: var(--primary); margin: -2px 0; box-shadow: 0 0 0 3px var(--primary-soft); }
+
+/* ── Empty state ─────────────────────────────────────────────────────────── */
+.empty { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 22px 16px; border: 1px dashed var(--border-strong); border-radius: var(--r-lg); color: var(--subtle); font-size: .8125rem; text-align: center; }
+
+/* sortable / drag */
+[data-sortable-item] { cursor: grab; -webkit-touch-callout: none; }
+[data-sortable-handle] > [data-sortable-item] { cursor: default; }
+[data-handle] { cursor: grab; }
+.is-dragging { opacity: .4; }
+html.is-sorting, html.is-sorting * { cursor: grabbing !important; user-select: none; -webkit-user-select: none; }
+
+/* the ghost is a clone of the dragged item and keeps its classes (.card…): !important so an app's own rules for those classes can never put it back in the layout */
+.drag-ghost { position: fixed !important; left: 0 !important; top: 0 !important; z-index: 9999 !important; width: var(--w) !important; margin: 0 !important; pointer-events: none !important; opacity: .92; transform: translate(var(--x, 0px), var(--y, 0px)) rotate(-1.5deg) !important; box-shadow: var(--sh-lg); }
+.drop-slot--x { width: 3px; height: auto; align-self: stretch; margin: 0 -2px; }
+[data-grabbed="true"] { outline: 2px solid var(--primary); outline-offset: 2px; box-shadow: var(--sh-lg); }
+[data-sortable].over { background: color-mix(in srgb, var(--primary) 7%, transparent); border-radius: var(--r-lg); }
+
+/* list rows */
+.list { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg); overflow: hidden; }
+.listrow { display: flex; align-items: center; gap: 12px; padding: 12px 16px; transition: background var(--fast); }
+.listrow + .listrow { border-top: 1px solid var(--border); }
+.listrow:hover { background: var(--surface-2); }
+.listrow__main { flex: 1 1 auto; min-width: 0; }
+.listrow__title { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.listrow__sub { color: var(--muted); font-size: .8125rem; }
+.listrow__actions { display: flex; align-items: center; gap: 2px; margin-left: auto; }
