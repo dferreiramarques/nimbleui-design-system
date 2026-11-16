@@ -26,6 +26,7 @@
   document.addEventListener('nimble:edit', function (e) { say('edit: "' + e.detail.oldValue + '" → "' + e.detail.value + '"'); });
   document.addEventListener('nimble:menuselect', function (e) { say('menu: ' + e.detail.value); });
   document.addEventListener('nimble:dialogclose', function (e) { if (e.target.id === 'dlg-edit') say('dialog closed: ' + (e.detail.result || 'dismissed')); });
+  document.addEventListener('nimble:filedrop', function (e) { say('file: ' + e.detail.files.map(function (f) { return f.name; }).join(', ')); });
   document.getElementById('show-toast').addEventListener('click', function () { NimbleUI.toast('Saved to Drive'); });
   document.getElementById('ask-del').addEventListener('click', function () {
     NimbleUI.confirm({ title: 'Delete roadmap?', message: 'This also removes its public copy.', confirmLabel: 'Delete', danger: true })
