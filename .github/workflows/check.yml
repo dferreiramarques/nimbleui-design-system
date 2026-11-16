@@ -1,0 +1,15 @@
+name: check
+on: [push, pull_request]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - name: components.css is generated from src/css
+        run: node tools/build-css.mjs --check
+      - name: themes only change colours
+        run: node tools/check-theme.mjs src/tokens.css
+      - name: scripts parse
+        run: node --check src/behaviors.js && node --check src/theme.js
