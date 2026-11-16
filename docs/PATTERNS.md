@@ -34,6 +34,8 @@ Full-bleed canvas with **floating panels** (`.panel` = `--surface` + 1px border 
 
 Avatar+name pill button (`btn--outline`, rounded) opening a `.menu.menu--end`: email line (muted), items, `.menu__sep`, destructive/sign-out last. Mobile: replace the pill with a ☰ `btn--icon` and prepend the mobile-only items (new, about, sync status, theme). Events: `nimble:menuselect`.
 
+**Install button:** `<button class="btn btn--text btn--icon" data-install></button>` in the top bar (before the theme toggle): icon only (download arrow), hidden until the browser offers installation, hidden again once installed or when running as an installed app. Needs a `manifest.webmanifest`. Event: `nimble:install {outcome}`. iOS Safari has no install prompt, so the button never shows there (Share → Add to Home Screen).
+
 ## 4. Auth gate and empty state — *Roadmaps `.login`, `.welcome`* · kit
 
 Centered card (`--r-xl`, `--sh-md`): logo mark, h1, one line of copy, one `btn--primary btn--lg` (provider icon + label), optional `btn--text btn--sm` ("Use a different account"), status line with `role="status"`. **Empty state** (no items yet) uses the same card with one primary action — never an empty page. Errors go in the status line in `--danger`, not in an alert.
