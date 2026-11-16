@@ -17,7 +17,7 @@
              (or your own classes: overlay[data-dialog-overlay][hidden] > [data-dialog-panel])
              focus trap, Esc / backdrop close ([data-static] disables), focus returns to opener; events nimble:dialogopen/-close
    Confirm   NimbleUI.confirm({title, message, confirmLabel, cancelLabel, danger}) -> Promise<boolean>
-   Install   [data-install] (button, hidden until the browser says the app can be installed; shows a download-arrow icon, no text; click = install prompt;
+   Install   [data-install] (button, hidden until the browser says the app can be installed; shows a download-arrow icon, no text (in a menu row put <span class="install-ico"></span> next to the label); click = install prompt;
              hidden once installed or when already running as an installed app; needs a web app manifest; iOS has no install prompt, so it stays hidden there)
    Menu      [data-menu-toggle="#id"] + .menu[hidden] > [role=menuitem]; arrows/Home/End/Esc; event nimble:menuselect {item, value}
    Tabs      [data-tabs] > [role=tablist] > [role=tab][aria-controls]; panels [role=tabpanel]; event nimble:tab {tab, panel}
@@ -502,7 +502,7 @@
     var bs = document.querySelectorAll('[data-install]'), show = !!installEvt && !standalone();
     for (var i = 0; i < bs.length; i++) {
       var b = bs[i];
-      if (!b.firstElementChild) b.innerHTML = INSTALL_ICON;
+      var ic = b.querySelector('.install-ico') || (b.firstElementChild ? null : b); if (ic && !ic.firstElementChild) ic.innerHTML = INSTALL_ICON;
       if (!b.hasAttribute('aria-label')) b.setAttribute('aria-label', 'Install app');
       if (!b.hasAttribute('title')) b.setAttribute('title', 'Install app');
       b.hidden = !show;
