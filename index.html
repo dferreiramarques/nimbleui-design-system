@@ -55,6 +55,33 @@
     </div>
   </section>
 
+  <section class="g-sec" id="shelves"><h2>Shelves, matrix and file drop</h2>
+    <p class="g-help">A shelf is a <code>&lt;details&gt;</code> bar with a count; sortable items can drop on it. The matrix is a 2×2 for prioritising; the drop zone takes files by drag or click (<code>data-filedrop</code>).</p>
+    <div class="g-stack">
+      <details class="shelf shelf--info" open>
+        <summary class="shelf__head" data-sortable-drop="#shelf-list"><span class="shelf__label">Archive</span><span class="shelf__count">2</span><span class="shelf__hint">drop here</span><span class="shelf__chev"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></summary>
+        <div class="shelf__body"><div class="shelf__list" id="shelf-list"><div class="card"><div class="card__title">Old idea</div></div><div class="card"><div class="card__title">Shipped last year</div></div></div></div>
+      </details>
+      <details class="shelf shelf--ok">
+        <summary class="shelf__head"><span class="shelf__label">Done</span><span class="shelf__count">0</span><span class="shelf__chev"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></summary>
+        <div class="shelf__body"><div class="shelf__empty">Nothing here yet</div></div>
+      </details>
+      <div class="matrix">
+        <div></div><div class="matrix__axis">Low effort</div><div class="matrix__axis">High effort</div>
+        <div class="matrix__axis matrix__axis--y"><span>High impact</span></div>
+        <div class="matrix__quad matrix__quad--hl"><div class="matrix__head">Quick wins <span class="matrix__count">2</span></div><div class="matrix__cards"><span class="tag">Fix sign-in copy</span><span class="tag">Add shortcuts</span></div></div>
+        <div class="matrix__quad"><div class="matrix__head">Big bets <span class="matrix__count">1</span></div><div class="matrix__cards"><span class="tag">Offline mode</span></div></div>
+        <div class="matrix__axis matrix__axis--y"><span>Low impact</span></div>
+        <div class="matrix__quad"><div class="matrix__head">Fill-ins <span class="matrix__count">0</span></div><div class="matrix__cards"></div></div>
+        <div class="matrix__quad"><div class="matrix__head">Maybe later <span class="matrix__count">0</span></div><div class="matrix__cards"></div></div>
+      </div>
+      <div class="dropzone" id="demo-drop" tabindex="0" role="button" data-filedrop data-filedrop-input="#demo-file" data-filedrop-accept=".json">
+        <span class="dropzone__title">Drop a backup here, or click to choose</span><span class="dropzone__hint">.json only</span>
+      </div>
+      <input type="file" id="demo-file" accept=".json" hidden>
+    </div>
+  </section>
+
   <section class="g-sec" id="start"><h2>Get started</h2>
     <p class="g-help">Copy <code>tokens.css</code>, <code>components.css</code>, <code>theme.js</code> and <code>behaviors.js</code> from <code>src/</code> into your project, then:</p>
     <div class="snippet"><pre>&lt;html lang="en" data-theme="dark" data-accent="indigo"&gt;

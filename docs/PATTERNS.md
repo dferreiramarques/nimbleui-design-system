@@ -52,13 +52,13 @@ Centered card (`--r-xl`, `--sh-md`): logo mark, h1, one line of copy, one `btn--
 
 Pill tabs, one colour per tab (`--tab-color`, automatic or picked), selected = tinted fill + coloured border. Reorderable (`data-sortable-axis="x"`, `nimble:sort`), `+` dashed tab to add, right-click (long-press on touch) opens a small colour popover (6×N swatches + custom input; `aria-pressed` on the active one). ≤ 700px: only the open tab shows between ‹ › buttons. For plain section switching use `.seg` or `.tabs__list`; this pattern is for *user-owned, orderable, colourable* items.
 
-## 8. Collapsible shelves and drop targets — *Taskboards archive/done* · css-todo
+## 8. Collapsible shelves and drop targets — *Taskboards archive/done* · in kit (`.shelf`)
 
-A 48px header strip (label, count, chevron, action) that expands to ~300px, holding compact rows. While a card is dragged, shelves show a `.drop-overlay` ("ARCHIVE", "MARK DONE") and the dashed `over` outline; dropping emits `nimble:sort`. Collapse state is the app's to remember.
+A 48px header strip (label, count, chevron, action) that expands to ~300px, holding compact rows. While a card is dragged, shelves show a `.drop-overlay` ("ARCHIVE", "MARK DONE") and the dashed `over` outline; dropping emits `nimble:sort`. Collapse state is the app's to remember. `<details class="shelf shelf--ok"><summary class="shelf__head" data-sortable-drop="#list">…label, count, chevron…</summary><div class="shelf__body">…</div></details>`: no script to open/close; the tone modifier (`--ok/--info/--warn`) sets its colour.
 
-## 9. Matrix (2×2) — *Taskboards quick-wins* · css-todo
+## 9. Matrix (2×2) — *Taskboards quick-wins* · in kit (`.matrix`)
 
-Four `.col`-style quadrants (impact × effort: quick wins, big bets, fill-ins, time sinks) each with title, count and a sortable list; axis labels outside; an "unrated" tray below. Dropping into a quadrant sets two attributes of the card — handle in the `nimble:sort` listener by reading the target container's `data-*`.
+Four `.col`-style quadrants (impact × effort: quick wins, big bets, fill-ins, time sinks) each with title, count and a sortable list; axis labels outside; an "unrated" tray below. Dropping into a quadrant sets two attributes of the card — handle in the `nimble:sort` listener by reading the target container's `data-*`. `.matrix` with `.matrix__axis` labels and four `.matrix__quad` (`--hl` highlights the quick wins); one column on phones.
 
 ## 10. Filter chips — *Taskboards owner filter* · kit
 
@@ -84,9 +84,9 @@ Always-visible `.sync` chip: `saved` · `saving` · `offline` · `error` (also a
 
 One path: `NimbleUI.confirm({ title, message, confirmLabel, danger: true })` naming what is deleted and what else it affects (e.g. the public copy). Focus starts on Cancel. After deleting something cheap to restore, prefer **toast with Undo** over a confirm. Never a native `confirm()`.
 
-## 16. Import / export and file drop — *Roadmaps backup, Taskboards, Diagramico imports* · css-todo
+## 16. Import / export and file drop — *Roadmaps backup, Taskboards, Diagramico imports* · in kit (`.dropzone`, `data-filedrop`)
 
-Export/Import live in the account menu. Import: hidden `<input type=file>`, then a dialog stating **merge vs replace** (replace on a shared item warns about revoking its public copy). Dropping a file over the page shows a full-window `.drop-overlay` ("Drop to import"). Always validate/clean on import (rebuild field by field; text stays text).
+Export/Import live in the account menu. Import: hidden `<input type=file>`, then a dialog stating **merge vs replace** (replace on a shared item warns about revoking its public copy). Dropping a file over the page shows a full-window `.drop-overlay` ("Drop to import"). Always validate/clean on import (rebuild field by field; text stays text). `.dropzone` with `data-filedrop`, `data-filedrop-input="#file"`, `data-filedrop-accept=".json"`; event `nimble:filedrop {files}`.
 
 ## 17. Help, shortcuts and tours — *Diagramico, Taskboards help modal* · kit
 
