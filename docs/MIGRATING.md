@@ -36,6 +36,8 @@ First migration: **Roadmaps** (branch `nimbleui-migration`). Use this for Taskbo
 - **Kit gaps show up in the parity check, not in the code review:** `.lp-demo`, `.doc__date` and the 480px topbar rule were missing from the kit and were only caught by comparing computed styles of the old and new product pages.
 - **Simulate a signed-in app** by seeding the app's own localStorage keys (profile hint + boards) and hiding the sign-in gate; load old and new versions under `/m/` and `/b/` of one server so iframes are same-origin and can be compared.
 
+- **Test mobile with hostile data, not just widths.** The "slight horizontal scroll" on phones came from long unbroken text (a tagline with a URL, a 90-character title) stretching `1fr` grid tracks and flex rows, not from any viewport width. Measure `scrollWidth` vs `clientWidth` and list elements with `right > clientWidth` at 320/360/375/393/412px (also fractional widths) while a dialog, a menu and a toast are open, with long-text fixtures.
+
 ## Testing recipes
 
 - **Fake backend page:** copy `public/`, replace the sync/auth script with a stub that calls the app's hooks with sample data; serve with `python -m http.server`. Lets you exercise the whole UI without credentials.

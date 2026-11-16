@@ -74,3 +74,14 @@ Extra components (CSS only): `.switch`, `.check`, `.radio` (+ `.opt` label), `.s
 ## Theme and density
 
 `theme.js`: preference `auto | light | dark` (default **auto** = `prefers-color-scheme`), stored in `localStorage['nimble-theme']`; sets `data-theme` (resolved) and `data-theme-pref`. `[data-theme-toggle]` flips; `[data-theme-set="auto|light|dark"]` sets (and gets `aria-pressed`). `data-density="compact"` on `<html>` or a wrapper shrinks controls (`--ctl-h 30`, `--field-h 32`, `--fs .8125rem`) — a size, never tied to the theme.
+
+## Mobile and overflow rules
+
+Built into `components.css`; keep them when adding components:
+
+- **Grid tracks use `minmax(0, 1fr)`**, never plain `1fr` (it is `minmax(auto, 1fr)` and grows with long content). Applies to every single-column fallback (`.cols`, `.grid2/3`, `.steps`, `.row2`).
+- **Flex/grid children that hold text get `min-width: 0`** (`.col`, `.card`, `.fcard`, `.field`, `.listrow__main`, `.hero__row > *`, `.dialog__body > *`).
+- **`body { overflow-wrap: anywhere }`**: unbroken names, URLs and ids wrap; `pre/code/.snippet` opt out and scroll inside their own box. `anywhere` (not `break-word`) also lowers the min-content size, which is what keeps flex/grid tracks inside the viewport.
+- **Rows of actions wrap** (`.card__foot { flex-wrap: wrap }`), so five icon buttons never push a card wider than the screen.
+- `body { overflow-x: clip }` is only a safety net. If you need it to hide something, there is a bug.
+- Check with the **Long content** section of the gallery at 320, 360, 375, 393 and 412px, and with real data (long names, taglines with URLs).
