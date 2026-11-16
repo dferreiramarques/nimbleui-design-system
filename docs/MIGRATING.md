@@ -51,6 +51,11 @@ First migration: **Roadmaps** (branch `nimbleui-migration`). Use this for Taskbo
 - **Don't load the kit's component CSS into an app that has no reset of its own.** Diagramico relied on browser defaults; the kit's base rules changed `box-sizing`, `line-height` and several `.panel`/`.topbar` metrics on 200+ elements. Take only `behaviors.js` and write the few rules you need (toast container) in the app until the kit splits `base.css` from the components.
 - **When a legacy handler closes a dialog itself** (Esc, backdrop), keep it: put `data-static` on the overlay so the kit only adds the focus trap, aria and focus restore, and call `NimbleUI.dialog.close` from the app's own close function.
 
+- **Replacing a hand-written drag:** map each list to `data-sortable` + a shared `data-sortable-group`, keep the app's data function and call it from one `nimble:sort` handler (compute the target status from `to.id` and the id of the next sibling item); delete ghost, indicator, zone detection and autoscroll code; move app CSS from `.dragging-source`/`body.dragging-active` to `.is-dragging`/`html.is-sorting`; remove `touch-action: pan-y` from the items (a swipe still scrolls; the kit starts a touch drag after a short hold and cancels the native scroll once it started).
+- **Anything that must not drag** (read-only viewer, armed card) gets `data-no-drag`; a gesture-only veto can be set in the item's own `pointerdown` handler, which runs before the kit's document listener.
+- **A drag ghost is a clone:** legacy item classes (`position: relative` on `.card`) leak into it; the kit's ghost rules are `!important` for that reason. If the ghost is invisible or pushes the layout, look there first.
+- **Debugging a drag in the browser pane:** `elementsFromPoint` returns nothing outside the viewport, so clamp test coordinates; check `scrollY` after a drag (a scrolled page shifts every list under the pointer).
+
 ## Testing recipes
 
 - **Fake backend page:** copy `public/`, replace the sync/auth script with a stub that calls the app's hooks with sample data; serve with `python -m http.server`. Lets you exercise the whole UI without credentials.

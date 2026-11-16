@@ -68,6 +68,8 @@ Dependency-free, CSP-safe, wired by attributes; results are bubbling `CustomEven
 | **Tabs** | `[data-tabs] > .tabs__list[role=tablist] > .tab[role=tab][aria-controls]` + `[role=tabpanel]` | arrows/Home/End · `nimble:tab {tab, panel}` |
 | **Toast** | — | `NimbleUI.toast(text, {tone: 'success\|info\|warn\|error\|loading', duration, sticky})`; same text+tone is not stacked, it shows (×n); returns `{el, dismiss()}` |
 
+Sort extras: `nimble:sortstart {item, from}` / `nimble:sortend {item, committed}` (UI state while dragging; `html.is-sorting` is also set); item `[data-no-drag]` = not draggable (pointer and keyboard); `[data-sortable-over="class"]` on a list = class toggled on its zone (`[data-sortable-zone]`) while hovered; any element with `[data-sortable-drop="#list"]` (e.g. a collapsed shelf) drops at the end of that list when hovered; `NimbleUI.sortable.cancel()` / `.active()`. The page only autoscrolls when it can actually scroll (a fixed `overflow:hidden` layout never does).
+
 Dynamic content: a `MutationObserver` makes new sortable/editable nodes focusable; call `NimbleUI.init(root)` after inserting tabs.
 
 Extra components (CSS only): `.switch`, `.check`, `.radio` (+ `.opt` label), `.spinner`, `.skeleton`, `.sync[data-state=saved|saving|offline|error]`, `.list/.listrow`, `[data-tip]` tooltip, `.menu`, `.tabs__list/.tab`, `.sr-only`.
