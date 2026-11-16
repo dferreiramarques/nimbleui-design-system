@@ -59,6 +59,10 @@ First migration: **Roadmaps** (branch `nimbleui-migration`). Use this for Taskbo
 - **A small app already on the suite language** (Veredicto) needs no component migration: tokens + theme + behaviors, its own status colours kept as app tokens in colour-only theme blocks, native `<dialog>` and `<details>` left alone. Parity (computed styles incl. colours) is the acceptance test, which is why status tokens were *not* mapped to the kit's `--success/--warn` (different values, lower contrast for text on tinted tags).
 - **Seed the app's own storage** (its localStorage key and document shape) on the host page and load both versions in `srcdoc` iframes: same-origin storage means both render the same data.
 
+- **Two storage formats for one key breaks theme sharing.** Kanbi's app stored `"dark"` (JSON via its helper) while its landing read the raw string. Use one plain string per key; `theme.js` now ignores quotes and invalid values (falls back to auto). Check this when an app has a storage helper.
+- **Persist only a user choice.** Applying the system theme must not write it to storage, or "auto" turns into a frozen value after the first visit.
+- **Apps with obfuscated or untested inline JS:** keep to tokens, theme and fonts; patch only the small readable theme block; verify by parity (computed styles incl. colours) and by toggling in the browser.
+
 ## Testing recipes
 
 - **Fake backend page:** copy `public/`, replace the sync/auth script with a stub that calls the app's hooks with sample data; serve with `python -m http.server`. Lets you exercise the whole UI without credentials.
