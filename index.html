@@ -35,7 +35,38 @@
   <section class="hero">
     <span class="eyebrow">Design system</span>
     <h1>Small, calm, colour-only theming.</h1>
-    <p class="hero__tag">Extracted from Roadmaps, Taskboards and Diagramico. One structure, three accents; dark and light differ <em>only</em> in colour.</p>
+    <p class="hero__tag">Extracted from five real products. One structure, five accents; dark and light differ <em>only</em> in colour. Plain CSS and a little vanilla JS: no framework, no build step.</p>
+    <div class="g-row g-gap">
+      <a class="btn btn--primary" href="#start">Get started</a>
+      <a class="btn btn--outline" href="https://github.com/dferreiramarques/nimbleui-design-system">View on GitHub</a>
+    </div>
+  </section>
+
+  <section class="g-sec" id="why"><h2>Why nimbleUI</h2>
+    <p class="g-help">A small kit that keeps a family of products consistent, and is easy to adopt in yours.</p>
+    <div class="grid3">
+      <article class="fcard"><h3>Colour-only themes</h3><p>Dark and light change nothing but colour, so switching theme never moves the layout. A script checks it on every change.</p></article>
+      <article class="fcard"><h3>Nothing to install</h3><p>Two stylesheets and two scripts. No framework, no bundler, no dependencies: copy the files and go.</p></article>
+      <article class="fcard"><h3>Behaviour from attributes</h3><p>Drag and sort, inline edit, dialogs, menus, tabs and toasts, declared in HTML and working with mouse, touch and keyboard.</p></article>
+      <article class="fcard"><h3>One accent per product</h3><p>Emerald, rose, indigo, amber or violet with one attribute, or add your own as five colours per theme.</p></article>
+      <article class="fcard"><h3>Safe and strict-CSP friendly</h3><p>No inline scripts or styles required. User text is always text, never HTML.</p></article>
+      <article class="fcard"><h3>Made for real content</h3><p>Checked at 375px with no horizontal scroll; long names and URLs wrap instead of breaking the page.</p></article>
+    </div>
+  </section>
+
+  <section class="g-sec" id="start"><h2>Get started</h2>
+    <p class="g-help">Copy <code>tokens.css</code>, <code>components.css</code>, <code>theme.js</code> and <code>behaviors.js</code> from <code>src/</code> into your project, then:</p>
+    <div class="snippet"><pre>&lt;html lang="en" data-theme="dark" data-accent="indigo"&gt;
+&lt;head&gt;
+  &lt;script src="nimble/theme.js"&gt;&lt;/script&gt;
+  &lt;link rel="stylesheet" href="nimble/tokens.css"&gt;
+  &lt;link rel="stylesheet" href="nimble/components.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;button class="btn btn--primary"&gt;New&lt;/button&gt;
+  &lt;script src="nimble/behaviors.js"&gt;&lt;/script&gt;
+&lt;/body&gt;</pre></div>
+    <p class="g-help">Everything below is the reference markup: view the source of this page. Not a fit for apps that need a large component catalogue (data grids, date pickers, rich text).</p>
   </section>
 
   <section class="g-sec"><h2>Buttons</h2>
@@ -149,7 +180,7 @@
 
   <section class="g-sec"><h2>Colour tabs, drawer, context bar</h2>
     <p class="g-help">Colour tabs: set <code>--tab-color</code> per tab from the app. Drawer and context bar are fixed-position; here they sit inside a frame.</p>
-    <div class="rtabs" aria-label="Roadmaps">
+    <div class="rtabs" aria-label="Colour tabs">
       <button class="rtab" aria-pressed="true" data-ex="1">Product A</button>
       <button class="rtab" aria-pressed="false" data-ex="2">Product B</button>
       <button class="rtab" aria-pressed="false" data-ex="3">Product C</button>
