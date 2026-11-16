@@ -38,6 +38,12 @@ First migration: **Roadmaps** (branch `nimbleui-migration`). Use this for Taskbo
 
 - **Test mobile with hostile data, not just widths.** The "slight horizontal scroll" on phones came from long unbroken text (a tagline with a URL, a 90-character title) stretching `1fr` grid tracks and flex rows, not from any viewport width. Measure `scrollWidth` vs `clientWidth` and list elements with `right > clientWidth` at 320/360/375/393/412px (also fractional widths) while a dialog, a menu and a toast are open, with long-text fixtures.
 
+- **Separate document content from UI chrome.** Diagramico's canvas text and exports use hard-coded font constants, so the UI could move to Inter without reflowing saved diagrams. Check where the app measures text (canvas, exports, PDF) before touching a font.
+- **A kit token named like an app token is a trap.** Diagramico defined `--bg`, `--muted`, `--danger` itself; aliasing them (`--bg: var(--bg)`) is a cycle. Delete the app's definition when the kit provides the same name; alias only the others.
+- **Resolve "auto" theme into `data-theme`.** Kit tokens react to `data-theme` only (no media query), so an app that left `auto` as "no attribute" needs an early inline script (no flash) plus a `prefers-color-scheme` listener. Keep a host-forced theme in a separate attribute (`data-host-theme`).
+- **Generated pages:** change the generator (`tools/build-guides.js`) and regenerate; check the diff of derived files (sitemap) is not just line endings before committing.
+- **Parity check for pages that run scripts:** fetch the HTML from each version, inject `<base href=origin/>`, drop the CSP meta, load it in a `srcdoc` iframe of a neutral host page (a page with its own CSP blocks cross-origin fetch), then compare computed styles; run it page by page to stay inside the tool timeout.
+
 ## Testing recipes
 
 - **Fake backend page:** copy `public/`, replace the sync/auth script with a stub that calls the app's hooks with sample data; serve with `python -m http.server`. Lets you exercise the whole UI without credentials.

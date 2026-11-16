@@ -19,6 +19,7 @@ They already shared one system (`product-page.css`); nimbleUI makes it a standal
 | Surfaces | `--bg --surface --surface-2 --surface-3 --border --border-strong` |
 | Text | `--text --muted --subtle` |
 | Accent | `--primary --primary-h --primary-fg --primary-ink --primary-soft --glow` |
+| Theme name | `--theme: light\|dark` (set per theme; read it from JS with `getComputedStyle` to pick canvas/chart palettes) |
 | Semantic | `--success --info --warn --danger --secondary --contrast` · `--now --next --later` |
 | Shadow/overlay | `--shadow-c --overlay` (colour) · `--sh-sm --sh-md --sh-lg` (geometry, in `:root`) |
 | Geometry | `--r-sm 6 · --r-md 8 · --r-lg 12 · --r-xl 16`, `--ring 3px`, `--wrap 1180px`, `--fast 140ms`, `--norm 220ms`, `--ease` |
