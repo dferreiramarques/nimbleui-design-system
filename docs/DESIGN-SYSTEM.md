@@ -80,6 +80,8 @@ Extra components (CSS only): `.switch`, `.check`, `.radio` (+ `.opt` label), `.s
 
 ## Mobile and overflow rules
 
+Breakpoints, per-product phone modes, test results and a worked example: [BREAKPOINTS.md](BREAKPOINTS.md).
+
 Built into `components.css`; keep them when adding components:
 
 - **Grid tracks use `minmax(0, 1fr)`**, never plain `1fr` (it is `minmax(auto, 1fr)` and grows with long content). Applies to every single-column fallback (`.cols`, `.grid2/3`, `.steps`, `.row2`).
