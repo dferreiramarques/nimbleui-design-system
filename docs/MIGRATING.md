@@ -65,7 +65,7 @@ First migration: **Roadmaps** (branch `nimbleui-migration`). Use this for Taskbo
 
 ## Keeping app copies in sync
 
-`node tools/sync-apps.mjs` lists which app copies of the kit (paths in `tools/apps.json`, siblings of this repo) differ from `src/`; `--write` overwrites the drifted files (it never adds files a destination lacks). Run it after changing the kit, then commit in each app. It exits 1 on drift, so it can be used as a check. Copies are not pushed automatically: a kit change reaches an app only when that app commits its copy.
+`node tools/sync-apps.mjs` lists which app copies of the kit (paths in `tools/apps.json`, siblings of this repo) differ from `src/`; `--write` overwrites the drifted files (it never adds files a destination lacks). Run it after changing the kit, then commit in each app. It exits 1 on drift, so it can be used as a check. `.github/workflows/sync-apps.yml` does it on every push to `main` that touches `src/`: it opens a "Sync nimbleUI kit" PR in each app repo (needs the `APPS_TOKEN` secret described in the workflow); merging that PR deploys the app. Without the secret, copies are not pushed automatically: a kit change reaches an app only when that app commits its copy.
 
 ## Testing recipes
 

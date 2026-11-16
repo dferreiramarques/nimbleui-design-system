@@ -1,4 +1,4 @@
-// Usage: node tools/sync-apps.mjs [--write]
+// Usage: node tools/sync-apps.mjs [--write] [--only <repo>]
 // Compares the kit copies in the app checkouts (tools/apps.json) with src/ and reports drift.
 // With --write it overwrites the drifted files (never adds files a destination does not already have).
 // Exit code 1 when there is drift and --write was not given, so it can run as a check.
@@ -14,9 +14,12 @@ const SRC = {
 };
 const norm = s => s.replace(/\r\n/g, '\n');
 const write = process.argv.includes('--write');
+const oi = process.argv.indexOf('--only');
+const only = oi > 0 ? process.argv[oi + 1] : null;   // limit to one app repo (the first path segment in apps.json)
 const { destinations } = JSON.parse(readFileSync(path.join(root, 'tools', 'apps.json'), 'utf8'));
 let drift = 0;
 for (const d of destinations) {
+  if (only && d.split('/')[0] !== only) continue;
   const dir = path.resolve(root, '..', d);
   if (!existsSync(dir)) { console.log(`skip   ${d} (not checked out)`); continue; }
   for (const [name, rel] of Object.entries(SRC)) {

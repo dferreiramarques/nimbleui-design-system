@@ -1,0 +1,37 @@
+# When the kit changes on main, open a PR in each app repo with the updated copy of the kit.
+# Needs a repository secret APPS_TOKEN: a fine-grained personal access token with, on the app repos,
+# Contents: read & write and Pull requests: read & write. Merging each PR deploys that app.
+name: sync-apps
+on:
+  push:
+    branches: [main]
+    paths: ['src/**']
+  workflow_dispatch:
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        repo: [roadmaps, taskboards, veredicto, kanbi-cards, diagramico]
+    steps:
+      - uses: actions/checkout@v4
+        with: { path: nimbleui-design-system }
+      - uses: actions/checkout@v4
+        with:
+          repository: ${{ github.repository_owner }}/${{ matrix.repo }}
+          token: ${{ secrets.APPS_TOKEN }}
+          path: ${{ matrix.repo }}
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - name: copy the kit into the app
+        run: node nimbleui-design-system/tools/sync-apps.mjs --write --only ${{ matrix.repo }}
+      - uses: peter-evans/create-pull-request@v6
+        with:
+          path: ${{ matrix.repo }}
+          token: ${{ secrets.APPS_TOKEN }}
+          branch: nimble-kit-sync
+          commit-message: "Sync nimbleUI kit (${{ github.sha }})"
+          title: "Sync nimbleUI kit"
+          body: "Automatic copy of the kit at nimbleui-design-system@${{ github.sha }}. Review the diff, then merge to deploy."
+          delete-branch: true
