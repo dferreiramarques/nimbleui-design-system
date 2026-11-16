@@ -34,7 +34,7 @@ Full-bleed canvas with **floating panels** (`.panel` = `--surface` + 1px border 
 
 Avatar+name pill button (`btn--outline`, rounded) opening a `.menu.menu--end`: email line (muted), items, `.menu__sep`, destructive/sign-out last. Mobile: replace the pill with a ☰ `btn--icon` and prepend the mobile-only items (new, about, sync status, theme). Events: `nimble:menuselect`.
 
-**Install button:** `<button class="btn btn--text btn--icon" data-install></button>` in the top bar (before the theme toggle): icon only (download arrow), hidden until the browser offers installation, hidden again once installed or when running as an installed app. Needs a `manifest.webmanifest`. Event: `nimble:install {outcome}`. iOS Safari has no install prompt, so the button never shows there (Share → Add to Home Screen).
+**Install:** an icon-only button in the top bar breaks narrow bars (it wrapped the account pill), so put it in the account menu instead: `<button class="menu__item menu__row" role="menuitem" data-install hidden><span>Install app</span><span class="install-ico"></span></button>`, and on the product page as `<button class="btn btn--outline btn--lg" data-install hidden><span class="install-ico"></span> Install the app</button>` (load `behaviors.js` there). It stays hidden until the browser offers installation, and again once installed or when running as an installed app. Needs a `manifest.webmanifest` with PNG icons (192, 512, maskable) and an `apple-touch-icon`. Event: `nimble:install {outcome}`. iOS Safari has no install prompt, so it never shows there (Share → Add to Home Screen).
 
 ## 4. Auth gate and empty state — *Roadmaps `.login`, `.welcome`* · kit
 

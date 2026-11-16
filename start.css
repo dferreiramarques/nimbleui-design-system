@@ -1,0 +1,16 @@
+/* start.html only: the architecture figure and the checklist. Colours via tokens; geometry defined once. */
+.arch { margin: 0; padding: 16px; background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--r-lg); }
+.arch svg { display: block; width: 100%; height: auto; }
+.arch__box { fill: var(--surface); stroke: var(--border-strong); stroke-width: 1.5; }
+.arch__box--srv { stroke: var(--primary); }
+.arch__box--drv { stroke: var(--info); }
+.arch__t { fill: var(--text); font: 600 15px var(--font, Inter, system-ui, sans-serif); }
+.arch__s { fill: var(--muted); font: 400 12px var(--font, Inter, system-ui, sans-serif); }
+.arch__line { fill: none; stroke: var(--muted); stroke-width: 1.5; }
+.arch__line--dash { stroke-dasharray: 5 4; }
+.arch__head { fill: var(--muted); }
+.check { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+.check li { position: relative; padding: 10px 12px 10px 40px; background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--r-md); font-size: .9375rem; }
+.check li::before { content: ""; position: absolute; left: 14px; top: 14px; width: 14px; height: 14px; border: 2px solid var(--primary); border-radius: 4px; }
+.snippet .c { color: var(--muted); }
+@media (max-width: 560px) { .arch { padding: 8px; } }
