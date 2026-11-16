@@ -46,7 +46,7 @@ Centered card (`--r-xl`, `--sh-md`): logo mark, h1, one line of copy, one `btn--
 
 `.overlay > .dialog` with `.field`s: text `.input`, `.textarea`, optional selectors. Level/priority pickers (Taskboards `modal__level-btn`) = `.seg` with `aria-pressed`. Toggles = `.switch`. Reuse labels = `.tag--btn` chips (`aria-pressed`). Enter saves in single-line fields, Esc cancels, invalid → `aria-invalid="true"` + `.field__hint`. Destructive action sits left in the footer; Cancel + primary right.
 
-## 7. Colour-coded tabs — *Roadmaps `.rtab`* · css-todo
+## 7. Colour-coded tabs — *Roadmaps `.rtab`* · in kit (`.rtabs`)
 
 Pill tabs, one colour per tab (`--tab-color`, automatic or picked), selected = tinted fill + coloured border. Reorderable (`data-sortable-axis="x"`, `nimble:sort`), `+` dashed tab to add, right-click (long-press on touch) opens a small colour popover (6×N swatches + custom input; `aria-pressed` on the active one). ≤ 700px: only the open tab shows between ‹ › buttons. For plain section switching use `.seg` or `.tabs__list`; this pattern is for *user-owned, orderable, colourable* items.
 
@@ -62,11 +62,11 @@ Four `.col`-style quadrants (impact × effort: quick wins, big bets, fill-ins, t
 
 Row of `.chip--btn` / `.tag--btn` with `aria-pressed`; "All" resets. Filtering hides items with `hidden`; counts reflect the filter; drag is disabled while filtered (or shows a notice).
 
-## 11. Drawer / document list — *Diagramico* · css-todo
+## 11. Drawer / document list — *Diagramico* · in kit (`.drawer`, `.doclist`)
 
 Left drawer (`min(340px,100vw)`, `--sh-lg`, scrim behind, Esc/backdrop close; reuse dialog focus handling) with header (title + close), search/new, and a list of `.listrow`s: name, mono meta line, row actions revealed on hover/focus (always on touch), current item tinted `--primary-soft`. Same rows serve a full-page directory (Roadmaps `.dcard` grid is the card variant of this).
 
-## 12. Contextual toolbar and tooltips — *Diagramico ctxbar/rail* · css-todo
+## 12. Contextual toolbar and tooltips — *Diagramico ctxbar/rail* · in kit (`.ctxbar`, `data-tip`)
 
 Small `.panel` of `btn--icon btn--sm` + selects + swatch rows, positioned next to the selection, `max-width: 100vw − 20px` with horizontal scroll hidden. Every icon-only button has `aria-label` and `data-tip`; shortcuts shown in the tip. Keep it keyboard reachable (toolbar order = visual order).
 

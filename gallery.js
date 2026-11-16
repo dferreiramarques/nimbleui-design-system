@@ -32,3 +32,4 @@
       .then(function (ok) { say('confirm: ' + ok); if (ok) NimbleUI.toast('Deleted', { tone: 'warn' }); });
   });
 })();
+document.querySelectorAll('.rtab[data-ex]').forEach(function (t, i) { t.style.setProperty('--tab-color', ['var(--primary)', 'var(--info)', 'var(--warn)'][i]); t.addEventListener('click', function () { document.querySelectorAll('.rtab[data-ex]').forEach(function (o) { o.setAttribute('aria-pressed', String(o === t)); }); }); });
