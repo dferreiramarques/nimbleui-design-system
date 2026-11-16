@@ -44,6 +44,10 @@ First migration: **Roadmaps** (branch `nimbleui-migration`). Use this for Taskbo
 - **Generated pages:** change the generator (`tools/build-guides.js`) and regenerate; check the diff of derived files (sitemap) is not just line endings before committing.
 - **Parity check for pages that run scripts:** fetch the HTML from each version, inject `<base href=origin/>`, drop the CSP meta, load it in a `srcdoc` iframe of a neutral host page (a page with its own CSP blocks cross-origin fetch), then compare computed styles; run it page by page to stay inside the tool timeout.
 
+- **Retrofitting the kit into an app with its own CSS:** load `components.layered.css`; add `data-dialog-overlay` / `data-dialog-panel` to the app's own modal markup instead of rewriting it; replace each hand-written open/close/Esc/backdrop with `NimbleUI.dialog.*` and reset app state in `nimble:dialogclose`. Replace `.hidden` class checks with the `hidden` attribute (`el.hidden`). Then run the computed-style diff: it found the kit hiding `.card__actions`, `button { line-height }` and a blurred `.topbar` leaking in.
+- **A menu inside a button is invalid HTML:** when the app's pill is a `div` that contains the menu, split it into `div.wrapper > button[data-menu-toggle] + .menu[hidden]` and move the pill's look to the button.
+- **Pre-existing bugs show up when you diff** (here, a menu item meant for phones visible on desktop because an id selector beat the class): record them, do not silently fix them in a migration PR.
+
 ## Testing recipes
 
 - **Fake backend page:** copy `public/`, replace the sync/auth script with a stub that calls the app's hooks with sample data; serve with `python -m http.server`. Lets you exercise the whole UI without credentials.

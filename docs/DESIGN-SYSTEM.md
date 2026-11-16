@@ -66,7 +66,7 @@ Dependency-free, CSP-safe, wired by attributes; results are bubbling `CustomEven
 | **Confirm** | — | `NimbleUI.confirm({title, message, confirmLabel, cancelLabel, danger}) → Promise<boolean>` |
 | **Menu** | `.menu-wrap > button[data-menu-toggle="#id"] + .menu[hidden] > .menu__item[role=menuitem][data-value]` | arrows/Home/End/Esc, outside click · `nimble:menuselect {item, value}` |
 | **Tabs** | `[data-tabs] > .tabs__list[role=tablist] > .tab[role=tab][aria-controls]` + `[role=tabpanel]` | arrows/Home/End · `nimble:tab {tab, panel}` |
-| **Toast** | — | `NimbleUI.toast(text, {tone: 'warn', duration})` |
+| **Toast** | — | `NimbleUI.toast(text, {tone: 'success\|info\|warn\|error\|loading', duration, sticky})`; same text+tone is not stacked, it shows (×n); returns `{el, dismiss()}` |
 
 Dynamic content: a `MutationObserver` makes new sortable/editable nodes focusable; call `NimbleUI.init(root)` after inserting tabs.
 
@@ -86,3 +86,8 @@ Built into `components.css`; keep them when adding components:
 - **Rows of actions wrap** (`.card__foot { flex-wrap: wrap }`), so five icon buttons never push a card wider than the screen.
 - `body { overflow-x: clip }` is only a safety net. If you need it to hide something, there is a bug.
 - Check with the **Long content** section of the gallery at 320, 360, 375, 393 and 412px, and with real data (long names, taglines with URLs).
+
+## Using the kit inside an app that has its own CSS
+
+- Load `components.layered.css` instead of `components.css`: the kit goes into the `nimble` cascade layer, so the app's un-layered rules win over same-named classes (`.card`, `.toast`, `.topbar`). Anything the app does not set still falls through, so measure (computed-style diff before/after) and add overrides where needed (for example `button, input { line-height: normal }`, or `.card__actions { opacity: 1 }` when the kit would hide it).
+- Dialogs can keep the app's own markup: `overlay[data-dialog-overlay][hidden] > panel[data-dialog-panel]`, `[data-dialog-close]` on the close buttons; open and close with `NimbleUI.dialog.open/close` and listen to `nimble:dialogclose` to reset state (it also fires on Esc and backdrop clicks).
