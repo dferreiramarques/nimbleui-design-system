@@ -48,6 +48,9 @@ First migration: **Roadmaps** (branch `nimbleui-migration`). Use this for Taskbo
 - **A menu inside a button is invalid HTML:** when the app's pill is a `div` that contains the menu, split it into `div.wrapper > button[data-menu-toggle] + .menu[hidden]` and move the pill's look to the button.
 - **Pre-existing bugs show up when you diff** (here, a menu item meant for phones visible on desktop because an id selector beat the class): record them, do not silently fix them in a migration PR.
 
+- **Don't load the kit's component CSS into an app that has no reset of its own.** Diagramico relied on browser defaults; the kit's base rules changed `box-sizing`, `line-height` and several `.panel`/`.topbar` metrics on 200+ elements. Take only `behaviors.js` and write the few rules you need (toast container) in the app until the kit splits `base.css` from the components.
+- **When a legacy handler closes a dialog itself** (Esc, backdrop), keep it: put `data-static` on the overlay so the kit only adds the focus trap, aria and focus restore, and call `NimbleUI.dialog.close` from the app's own close function.
+
 ## Testing recipes
 
 - **Fake backend page:** copy `public/`, replace the sync/auth script with a stub that calls the app's hooks with sample data; serve with `python -m http.server`. Lets you exercise the whole UI without credentials.
