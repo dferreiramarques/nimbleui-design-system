@@ -56,6 +56,9 @@ First migration: **Roadmaps** (branch `nimbleui-migration`). Use this for Taskbo
 - **A drag ghost is a clone:** legacy item classes (`position: relative` on `.card`) leak into it; the kit's ghost rules are `!important` for that reason. If the ghost is invisible or pushes the layout, look there first.
 - **Debugging a drag in the browser pane:** `elementsFromPoint` returns nothing outside the viewport, so clamp test coordinates; check `scrollY` after a drag (a scrolled page shifts every list under the pointer).
 
+- **A small app already on the suite language** (Veredicto) needs no component migration: tokens + theme + behaviors, its own status colours kept as app tokens in colour-only theme blocks, native `<dialog>` and `<details>` left alone. Parity (computed styles incl. colours) is the acceptance test, which is why status tokens were *not* mapped to the kit's `--success/--warn` (different values, lower contrast for text on tinted tags).
+- **Seed the app's own storage** (its localStorage key and document shape) on the host page and load both versions in `srcdoc` iframes: same-origin storage means both render the same data.
+
 ## Testing recipes
 
 - **Fake backend page:** copy `public/`, replace the sync/auth script with a stub that calls the app's hooks with sample data; serve with `python -m http.server`. Lets you exercise the whole UI without credentials.
