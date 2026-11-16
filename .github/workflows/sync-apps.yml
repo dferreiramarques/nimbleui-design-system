@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        repo: [roadmaps, taskboards, veredicto, kanbi-cards, diagramico]
+        repo: [roadmaps, taskboards, veredicto, kanbi-cards, diagramico, nimble-starter]
     steps:
       - uses: actions/checkout@v4
         with: { path: nimbleui-design-system }

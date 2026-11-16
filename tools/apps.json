@@ -6,6 +6,7 @@
     "taskboards/public/nimble",
     "veredicto/public/nimble",
     "kanbi-cards/nimble",
-    "diagramico/assets/nimble"
+    "diagramico/assets/nimble",
+    "nimble-starter/public/nimble"
   ]
 }
