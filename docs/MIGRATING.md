@@ -31,6 +31,11 @@ First migration: **Roadmaps** (branch `nimbleui-migration`). Use this for Taskbo
 
 - **Prove the pages did not change.** Serve the old and the new `public/` on two ports (a tiny server with CORS), fetch each page, inline its CSS into a `srcdoc` iframe, and compare `getComputedStyle` of every element in both themes at 1280 and 375px. It caught a lost specificity (`.lp-hero .lp-note` became `.lp-note` and lost to `.lp-hero p`) and a missing `position: relative`. Expected leftovers are deliberate (e.g. no `grab` cursor on a static demo; accent links on light legal pages now use `--primary-fg`, which has better contrast).
 
+- **Big apps migrate in phases.** Phase 1: tokens only (alias the app's own colour/radius/shadow names to nimble tokens in one non-theme `:root` block), fonts, theme, product pages. Phase 2: components and behaviours, one at a time. Loading the kit's `components.css` in an app that already has `.card`, `.toast`, `.topbar`, `.btn…` classes makes them collide; load it only once the app's components are renamed.
+- **Mirrored folders.** Taskboards ships the same files from the repo root (GitHub Pages) and `public/` (Render): edit the root, copy to `public/`, and `cmp` them before committing. Bump the service-worker cache name and list the new files.
+- **Kit gaps show up in the parity check, not in the code review:** `.lp-demo`, `.doc__date` and the 480px topbar rule were missing from the kit and were only caught by comparing computed styles of the old and new product pages.
+- **Simulate a signed-in app** by seeding the app's own localStorage keys (profile hint + boards) and hiding the sign-in gate; load old and new versions under `/m/` and `/b/` of one server so iframes are same-origin and can be compared.
+
 ## Testing recipes
 
 - **Fake backend page:** copy `public/`, replace the sync/auth script with a stub that calls the app's hooks with sample data; serve with `python -m http.server`. Lets you exercise the whole UI without credentials.
