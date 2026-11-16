@@ -147,6 +147,27 @@
     <div class="toast g-toast"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4 10-10"/></svg>Saved to Drive</div>
   </section>
 
+  <section class="g-sec"><h2>Colour tabs, drawer, context bar</h2>
+    <p class="g-help">Colour tabs: set <code>--tab-color</code> per tab from the app. Drawer and context bar are fixed-position; here they sit inside a frame.</p>
+    <div class="rtabs" aria-label="Roadmaps">
+      <button class="rtab" aria-pressed="true" data-ex="1">Product A</button>
+      <button class="rtab" aria-pressed="false" data-ex="2">Product B</button>
+      <button class="rtab" aria-pressed="false" data-ex="3">Product C</button>
+      <button class="rtab rtab--add" aria-label="New">+</button>
+    </div>
+    <div class="g-frame">
+      <aside class="drawer" aria-label="Documents">
+        <div class="drawer__head"><span class="drawer__title">My diagrams</span><button class="btn btn--text btn--icon btn--sm" aria-label="Close">✕</button></div>
+        <div class="doclist">
+          <div class="docitem" aria-current="true"><span class="docitem__name">Checkout flow</span><span class="docitem__meta">edited today</span><span class="docitem__acts"><button class="btn btn--text btn--icon btn--sm" aria-label="Rename">✎</button></span></div>
+          <div class="docitem"><span class="docitem__name">Onboarding with a very long name that must be clipped</span><span class="docitem__meta">3 days ago</span><span class="docitem__acts"><button class="btn btn--text btn--icon btn--sm" aria-label="Rename">✎</button></span></div>
+        </div>
+        <div class="drawer__foot"><button class="btn btn--outline">New diagram</button></div>
+      </aside>
+      <div class="ctxbar g-ctx"><button class="btn btn--text btn--icon btn--sm" aria-label="Bold">B</button><button class="btn btn--text btn--icon btn--sm" aria-label="Italic">I</button><span class="ctxbar__sep"></span><button class="btn btn--text btn--icon btn--sm" aria-label="Delete">✕</button></div>
+    </div>
+  </section>
+
   <section class="g-sec"><h2>Long content (must never widen the page)</h2>
     <p class="g-help">Unbroken names, URLs and ids wrap; check this section at 320px.</p>
     <div class="grid2">

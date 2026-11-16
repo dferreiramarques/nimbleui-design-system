@@ -111,3 +111,19 @@
 [data-tip] { position: relative; }
 [data-tip]::after { content: attr(data-tip); position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%); z-index: 60; padding: 4px 8px; border-radius: var(--r-sm); background: var(--text); color: var(--bg); font-size: .75rem; font-weight: 500; line-height: 1.4; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity var(--fast); }
 [data-tip]:hover::after, [data-tip]:focus-visible::after { opacity: 1; }
+
+/* ── Colour tabs (.rtabs/.rtab) — one tab per item, each with its own colour via --tab-color ── */
+.rtabs { display: flex; align-items: center; gap: 6px; max-width: 100%; overflow-x: auto; scrollbar-width: none; padding: 2px; }
+.rtabs::-webkit-scrollbar { display: none; }
+.rtab {
+  --tab-color: var(--primary);
+  display: inline-flex; align-items: center; gap: 6px; flex: none;
+  height: 32px; padding: 0 12px;
+  border: 1px solid var(--border); border-radius: var(--r-md);
+  background: var(--surface-2); color: var(--muted);
+  font-size: .8125rem; font-weight: 500; white-space: nowrap; user-select: none;
+  transition: background var(--fast), color var(--fast), border-color var(--fast), box-shadow var(--fast);
+}
+.rtab:hover { color: var(--text); background: var(--surface-3); }
+.rtab[aria-pressed="true"] { background: color-mix(in srgb, var(--tab-color) 12%, var(--surface)); border-color: var(--tab-color); color: var(--tab-color); font-weight: 600; box-shadow: var(--sh-sm); }
+.rtab--add { width: 32px; padding: 0; justify-content: center; border-style: dashed; background: transparent; }

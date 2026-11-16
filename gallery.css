@@ -11,3 +11,5 @@
 .g-skels { display: grid; gap: 8px; max-width: 360px; }
 .g-sk1 { height: 14px; width: 70%; }
 .g-sk2 { height: 14px; width: 45%; }
+.g-frame { position: relative; height: 300px; margin-top: 12px; overflow: hidden; transform: translateZ(0); border: 1px solid var(--border); border-radius: var(--r-lg); background: var(--bg); }
+.g-ctx { left: 360px; top: 24px; }

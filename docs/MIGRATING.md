@@ -63,6 +63,10 @@ First migration: **Roadmaps** (branch `nimbleui-migration`). Use this for Taskbo
 - **Persist only a user choice.** Applying the system theme must not write it to storage, or "auto" turns into a frozen value after the first visit.
 - **Apps with obfuscated or untested inline JS:** keep to tokens, theme and fonts; patch only the small readable theme block; verify by parity (computed styles incl. colours) and by toggling in the browser.
 
+## Keeping app copies in sync
+
+`node tools/sync-apps.mjs` lists which app copies of the kit (paths in `tools/apps.json`, siblings of this repo) differ from `src/`; `--write` overwrites the drifted files (it never adds files a destination lacks). Run it after changing the kit, then commit in each app. It exits 1 on drift, so it can be used as a check. Copies are not pushed automatically: a kit change reaches an app only when that app commits its copy.
+
 ## Testing recipes
 
 - **Fake backend page:** copy `public/`, replace the sync/auth script with a stub that calls the app's hooks with sample data; serve with `python -m http.server`. Lets you exercise the whole UI without credentials.

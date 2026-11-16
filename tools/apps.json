@@ -1,0 +1,11 @@
+{
+  "_": "App checkouts that carry a copy of the kit, relative to the folder that holds this repo's parent (siblings of this repo). Only files already present in a destination are updated.",
+  "destinations": [
+    "roadmaps/public/nimble",
+    "taskboards/nimble",
+    "taskboards/public/nimble",
+    "veredicto/public/nimble",
+    "kanbi-cards/nimble",
+    "diagramico/assets/nimble"
+  ]
+}
