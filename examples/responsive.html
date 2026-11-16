@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-accent="indigo">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>nimbleUI · responsive example</title>
+  <script src="../src/theme.js"></script>
+  <link rel="stylesheet" href="../src/tokens.css">
+  <link rel="stylesheet" href="../src/components.css">
+  <style>
+    /* App-specific rules only. The kit already stacks .cols at 900px; this app adds its own phone mode at 700px. */
+    .phone-only { display: none; }
+    @media (max-width: 700px) {
+      .desktop-only { display: none; }      /* secondary actions leave the top bar ... */
+      .phone-only { display: flex; }        /* ... and live in the menu instead */
+      .topbar__in { flex-wrap: nowrap; gap: 8px; }
+    }
+    /* Touch screens get bigger targets without touching the kit */
+    @media (pointer: coarse) { .btn { min-height: 44px; } .btn--icon { min-width: 44px; } }
+  </style>
+</head>
+<body>
+  <header class="topbar"><div class="wrap topbar__in">
+    <a class="brand" href="#">My app</a>
+    <span class="grow"></span>
+    <button class="btn btn--text desktop-only" type="button">Export</button>
+    <button class="btn btn--text btn--icon desktop-only" data-theme-toggle data-theme-icon aria-label="Toggle theme"></button>
+    <button class="btn btn--primary" type="button">New</button>
+    <span class="menu-wrap phone-only">
+      <button class="btn btn--text btn--icon" data-menu-toggle="#m" aria-haspopup="menu" aria-expanded="false" aria-label="Menu">☰</button>
+      <div class="menu menu--end" id="m" role="menu" hidden>
+        <button class="menu__item" role="menuitem" type="button">Export</button>
+        <button class="menu__item" role="menuitem" type="button" data-theme-toggle>Light / dark</button>
+      </div>
+    </span>
+  </div></header>
+
+  <main class="wrap">
+    <div class="cols">
+      <section class="col" data-col="now"><div class="col__head"><span class="col__dot"></span><span class="col__title">Now</span></div>
+        <div class="col__list"><article class="card"><h3 class="card__title">Resize this window</h3><p class="card__desc">Three columns above 900px, one column below. Under 700px the top bar keeps only New and a menu.</p></article></div></section>
+      <section class="col" data-col="next"><div class="col__head"><span class="col__dot"></span><span class="col__title">Next</span></div>
+        <div class="col__list"><article class="card"><h3 class="card__title">Averyveryverylongunbrokentitle_that_must_wrap_instead_of_widening_the_page</h3></article></div></section>
+      <section class="col" data-col="later"><div class="col__head"><span class="col__dot"></span><span class="col__title">Later</span></div>
+        <div class="col__list"><article class="card"><h3 class="card__title">Touch targets</h3><p class="card__desc">On touch screens buttons grow to 44px.</p></article></div></section>
+    </div>
+  </main>
+  <script src="../src/behaviors.js"></script>
+</body>
+</html>

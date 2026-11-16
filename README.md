@@ -4,7 +4,7 @@ A small, calm UI kit for building fast, focused web apps. **Plain CSS and a litt
 
 **[Live gallery](https://dferreiramarques.github.io/nimbleui-design-system/)**: toggle theme, accent and density, and try drag, dialogs and menus.
 
-nimbleUI was extracted from five real products and is what keeps them looking and behaving like one family. It is deliberately small: neutral surfaces, one accent colour, a handful of components that cover most small tools, and behaviours you switch on with HTML attributes.
+nimbleUI is made to cater the nimble suite of productivity apps by Monco.io, and is what keeps them looking and behaving like one family. It is deliberately small: neutral surfaces, one accent colour, a handful of components that cover most small tools, and behaviours you switch on with HTML attributes.
 
 ## Why use it
 
@@ -97,7 +97,7 @@ Current Chrome, Edge, Firefox and Safari. The kit relies on CSS custom propertie
 - `src/css/{base,controls,overlays,board,page}.css`: the CSS in modules; `src/components.css` is all of them generated (`node tools/build-css.mjs`). Use `components.css`, or `tokens.css` plus only the modules you need (`base.css` is the reset: skip it if your app has its own). `components.layered.css` loads the kit in a cascade layer, so your own CSS always wins
 - `src/theme.js`, `src/behaviors.js`: theme switching and attribute-driven behaviours
 - `index.html`, `gallery.css`, `gallery.js`: the live gallery
-- `docs/`: [DESIGN-SYSTEM](docs/DESIGN-SYSTEM.md) (principles, tokens), [PATTERNS](docs/PATTERNS.md), [DECISIONS](docs/DECISIONS.md) (why things are the way they are), [MIGRATING](docs/MIGRATING.md) (moving an existing app over, with test recipes)
+- `docs/`: [DESIGN-SYSTEM](docs/DESIGN-SYSTEM.md) (principles, tokens), [BREAKPOINTS](docs/BREAKPOINTS.md) (mobile, with a runnable example in `examples/`), [PATTERNS](docs/PATTERNS.md), [DECISIONS](docs/DECISIONS.md) (why things are the way they are), [MIGRATING](docs/MIGRATING.md) (moving an existing app over, with test recipes)
 - `templates/product-page/`: a product page plus privacy and terms; copy and fill the `{{PLACEHOLDER}}`s
 - `tools/`: `check-theme.mjs` (themes are colour-only), `build-css.mjs`, `sync-apps.mjs` (keeps app copies up to date)
 - `skill/SKILL.md`: a [Claude Code](https://claude.com/claude-code) skill so an assistant can apply the system to a new project; copy `skill/` to `~/.claude/skills/nimbleui-design-system/`
